@@ -319,6 +319,105 @@ $$\alpha_j \sim \mathcal N(\alpha + \color{turquoise}{\beta_\alpha \times z_j}, 
 
 # Bayesian framework
 
+## Frequentist *vs* Bayesian approaches
+
+<!-- to do et mettre plus bas -->
+
+likelihood commune au deux
+
+"La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre."
+
+qudn bcp de données => résultats proches
+
+## Why a Bayesian approach?
+
+<!-- to check and think about, why not bayesian computing costly ???-->
+
+* to account for uncertainty (and propagagte it), as we get the uncertainty associated to each fitted parameters
+
+* to leverage prior knowledge (previous studies or expert knowledge)
+
+* for its flexibility (adapted to heterogeneous or uncomplete data, possible to fit complex models)
+
+
+::: notes
+complex models can be hierarchical, non linear, etc...
+:::
+
+
+## Bayes theorem
+
+Theorem published by T. Bayes in 1763
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+where
+
+-   $P(A|B)$ is the probability of A given B
+-   $P(B|A)$ is the probability of B given A
+-   ${P(A)}$ is the probability of A
+-   ${P(B)}$ is the probability of B
+
+::: notes
+old theorem => implementation limited by computing facilities
+
+P(A) is called marginal probability of A (ie proba of A alone)
+:::
+
+
+## Bayes theorem
+
+<!-- TO FINISH : faire simple !!!!!! --> 
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+$$P(hypothesis|data) = \frac{P(data|hypothesis)*P(hypothesis)}{P(data)}$$
+> see if I keep the stage with the hyp or if I move direct to this (where $\theta$ is the parameter(s))
+
+$$P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}$$
+* $P(\theta|data)$: probability of $\theta$ given the data: this is the **posterior distribution**
+
+* $P(data|\theta)$: probability of the data given $\theta$: this is the likelihood
+
+* $P(\theta)$: probability of $\theta$ before knowing the data: this is the **prior distribution**
+
+* $P(data)$: a nomalising constant independant of $\theta$
+
+Our understanding of a phenomenon after observation $P(hypothesis|data)$ is our prior belief $P(hypothesis)$
+updated by the evidence $P(data|hypothesis)$
+<!-- to check how I frame this -->
+
+$$posterior \propto prior*likelihood$$
+
+$$updated~belief \propto prior~belief*current~evidence$$
+
+
+<!--explain why we get reed of the denominator-->
+
+::: notes
+Bayes theorem could be written as follow
+
+P(hyp|data) is what we want with our correlative approach
+
+likelihood, as in frequentist approach
+
+prior cannot depend on the data, it can be more or less informative, depending on what we already know
+::: 
+
+
+Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
+
+ what I understand a psoteriori is my prior belief updated with the proof of eveidence
+ 
+
+## Fitting the model - MCMC algorithm
+
+
+
+::: notes
+most of the time, it is difficult / impossible to calculate the posterior distributions, so we need to approximate it through simulation
+:::
+
+
+
 # Some examples
 
 # Conclusion
