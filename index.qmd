@@ -135,7 +135,7 @@ $$y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)$$
 ::: {.column width="50%"}
 
 ![](lm.png){width="200%"}
-[Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6){preview-link="false"}]{style="font-size: 22px"}
+Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6){preview-link="false"}]{style="font-size: 22px"}
 :::
 
 
@@ -329,6 +329,10 @@ likelihood commune au deux
 
 qudn bcp de données => résultats proches
 
+* Bayesian : credibility interval at X% => the true value of the parameter is with the credibility interval with a proba X 
+
+* Frequentist : confidence interval : if the experiment was repeated many times => X% of the intteravl would contain the true value of the parameter
+
 ## Why a Bayesian approach?
 
 <!-- to check and think about, why not bayesian computing costly ???-->
@@ -403,17 +407,67 @@ prior cannot depend on the data, it can be more or less informative, depending o
 ::: 
 
 
-Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
+<!-- Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
 
  what I understand a psoteriori is my prior belief updated with the proof of eveidence
+ -->
  
 
 ## Fitting the model - MCMC algorithm
 
+Markov Chain Monte Carlo
 
+method of simulations to approximate the posterior distributions => 
 
 ::: notes
 most of the time, it is difficult / impossible to calculate the posterior distributions, so we need to approximate it through simulation
+
+markow chain => to get a stationary distribution that is the posterior distribution of the parameters
+:::
+
+
+## Fitting the model - MCMC algorithm
+
+1- Initialisation: first values of the parameters (*current*)
+
+2- Randomly choose new *candidate* values for the parameters using a random walk function
+
+3- Calculate the ratio of posterior probabilities $R = \frac{P(posterior_{candidate})}{P(posterior_{current})}$ from the likelihoods and the prior probabilities 
+
+4- Accept or reject the candidate value
+
+* if R > 1 (candidate more likely) => accept
+
+* if R < 1 (candidate less likely) => accept if X drawn in $\mathcal{U}[0,1]$ < R (*this avoid getting stuck in a local maximum of likelihood*), reject otherwise
+
+5- Repeat steps 2 to 4 thousands of times
+
+ 
+
+<!-- voir comment sont choisiées les vakeurs d'initialisation
+-->
+
+
+::: notes
+! the initialisation value is NOT the prior, it's the first value of theta. But it needs to be compatible with the prior.
+
+random walk => EXPLIQUER COMMENT LA TAILLE DES PAS EST DECIDEE
+
+the proba of acception a less likely value is proportional to R
+
+:::
+
+
+## Fitting the model - MCMC algorithm
+
+![](random_walk.png){fig-align="center"}
+
+Source: [Wikipedia](https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm){style="font-size: 22px"}
+
+::: notes
+we do this many time after a burn-in period
+
+and with several chains
 :::
 
 

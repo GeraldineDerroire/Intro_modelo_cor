@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-03-10">
+  <meta name="dcterms.date" content="2026-03-16">
   <title>Hierarchical bayesian models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -341,7 +341,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-03-10</p>
+  <p class="date">2026-03-16</p>
 </section>
 <section>
 <section id="correlative-models" class="title-slide slide level1 center">
@@ -455,7 +455,7 @@ Géraldine Derroire
 <p><span style="font-size: 30px">The model predicts a probability density of Y for any value of X normally distributed around the regression line.</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="lm.png" style="width:200.0%"> <span style="font-size: 22px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6" data-preview-link="false">E. Marcon</a></span></p>
+<p><img data-src="lm.png" style="width:200.0%"> Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6" data-preview-link="false">E. Marcon</a>]{style=“font-size: 22px”}</p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p><span style="font-size: 25px">The mean value of Y for any value of X is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
@@ -566,11 +566,156 @@ Géraldine Derroire
 </div>
 </div>
 </section></section>
+<section>
 <section id="bayesian-framework" class="title-slide slide level1 center">
 <h1>Bayesian framework</h1>
 
 </section>
+<section id="frequentist-vs-bayesian-approaches" class="slide level2">
+<h2>Frequentist <em>vs</em> Bayesian approaches</h2>
+<!-- to do et mettre plus bas -->
+<p>likelihood commune au deux</p>
+<p>“La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre.”</p>
+<p>qudn bcp de données =&gt; résultats proches</p>
+<ul>
+<li class="fragment"><p>Bayesian : credibility interval at X% =&gt; the true value of the parameter is with the credibility interval with a proba X</p></li>
+<li class="fragment"><p>Frequentist : confidence interval : if the experiment was repeated many times =&gt; X% of the intteravl would contain the true value of the parameter</p></li>
+</ul>
+</section>
+<section id="why-a-bayesian-approach" class="slide level2">
+<h2>Why a Bayesian approach?</h2>
+<!-- to check and think about, why not bayesian computing costly ???-->
+<ul>
+<li class="fragment"><p>to account for uncertainty (and propagagte it), as we get the uncertainty associated to each fitted parameters</p></li>
+<li class="fragment"><p>to leverage prior knowledge (previous studies or expert knowledge)</p></li>
+<li class="fragment"><p>for its flexibility (adapted to heterogeneous or uncomplete data, possible to fit complex models)</p></li>
+</ul>
+<aside class="notes">
+<p>complex models can be hierarchical, non linear, etc…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bayes-theorem" class="slide level2">
+<h2>Bayes theorem</h2>
+<p>Theorem published by T. Bayes in 1763</p>
+<p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span> where</p>
+<ul>
+<li class="fragment"><span class="math inline">\(P(A|B)\)</span> is the probability of A given B</li>
+<li class="fragment"><span class="math inline">\(P(B|A)\)</span> is the probability of B given A</li>
+<li class="fragment"><span class="math inline">\({P(A)}\)</span> is the probability of A</li>
+<li class="fragment"><span class="math inline">\({P(B)}\)</span> is the probability of B</li>
+</ul>
+<aside class="notes">
+<p>old theorem =&gt; implementation limited by computing facilities</p>
+<p>P(A) is called marginal probability of A (ie proba of A alone)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="bayes-theorem-1" class="slide level2">
+<h2>Bayes theorem</h2>
+<!-- TO FINISH : faire simple !!!!!! -->
+<p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span> <span class="math display">\[P(hypothesis|data) = \frac{P(data|hypothesis)*P(hypothesis)}{P(data)}\]</span> &gt; see if I keep the stage with the hyp or if I move direct to this (where <span class="math inline">\(\theta\)</span> is the parameter(s))</p>
+<p><span class="math display">\[P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}\]</span> * <span class="math inline">\(P(\theta|data)\)</span>: probability of <span class="math inline">\(\theta\)</span> given the data: this is the <strong>posterior distribution</strong></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(P(data|\theta)\)</span>: probability of the data given <span class="math inline">\(\theta\)</span>: this is the likelihood</p></li>
+<li class="fragment"><p><span class="math inline">\(P(\theta)\)</span>: probability of <span class="math inline">\(\theta\)</span> before knowing the data: this is the <strong>prior distribution</strong></p></li>
+<li class="fragment"><p><span class="math inline">\(P(data)\)</span>: a nomalising constant independant of <span class="math inline">\(\theta\)</span></p></li>
+</ul>
+<p>Our understanding of a phenomenon after observation <span class="math inline">\(P(hypothesis|data)\)</span> is our prior belief <span class="math inline">\(P(hypothesis)\)</span> updated by the evidence <span class="math inline">\(P(data|hypothesis)\)</span> <!-- to check how I frame this --></p>
+<p><span class="math display">\[posterior \propto prior*likelihood\]</span></p>
+<p><span class="math display">\[updated~belief \propto prior~belief*current~evidence\]</span></p>
+<!--explain why we get reed of the denominator-->
+<aside class="notes">
+<p>Bayes theorem could be written as follow</p>
+<p>P(hyp|data) is what we want with our correlative approach</p>
+<p>likelihood, as in frequentist approach</p>
+<p>prior cannot depend on the data, it can be more or less informative, depending on what we already know</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
 
+ what I understand a psoteriori is my prior belief updated with the proof of eveidence
+ -->
+</section>
+<section id="fitting-the-model---mcmc-algorithm" class="slide level2">
+<h2>Fitting the model - MCMC algorithm</h2>
+<p>Markov Chain Monte Carlo</p>
+<p>method of simulations to approximate the posterior distributions =&gt;</p>
+<aside class="notes">
+<p>most of the time, it is difficult / impossible to calculate the posterior distributions, so we need to approximate it through simulation</p>
+<p>markow chain =&gt; to get a stationary distribution that is the posterior distribution of the parameters</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fitting-the-model---mcmc-algorithm-1" class="slide level2">
+<h2>Fitting the model - MCMC algorithm</h2>
+<p>1- Initialisation: first values of the parameters (<em>current</em>)</p>
+<p>2- Randomly choose new <em>candidate</em> values for the parameters using a random walk function</p>
+<p>3- Calculate the ratio of posterior probabilities <span class="math inline">\(R = \frac{P(posterior_{candidate})}{P(posterior_{current})}\)</span> from the likelihoods and the prior probabilities</p>
+<p>4- Accept or reject the candidate value</p>
+<ul>
+<li class="fragment"><p>if R &gt; 1 (candidate more likely) =&gt; accept</p></li>
+<li class="fragment"><p>if R &lt; 1 (candidate less likely) =&gt; accept if X drawn in <span class="math inline">\(\mathcal{U}[0,1]\)</span> &lt; R (<em>this avoid getting stuck in a local maximum of likelihood</em>), reject otherwise</p></li>
+</ul>
+<p>5- Repeat steps 2 to 4 thousands of times</p>
+<!-- voir comment sont choisiées les vakeurs d'initialisation
+-->
+<aside class="notes">
+<p>! the initialisation value is NOT the prior, it’s the first value of theta. But it needs to be compatible with the prior.</p>
+<p>random walk =&gt; EXPLIQUER COMMENT LA TAILLE DES PAS EST DECIDEE</p>
+<p>the proba of acception a less likely value is proportional to R</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fitting-the-model---mcmc-algorithm-2" class="slide level2">
+<h2>Fitting the model - MCMC algorithm</h2>
+<p><img data-src="random_walk.png" class="quarto-figure quarto-figure-center"> Source: [Wikipedia]{https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm}{style=“font-size: 22px”}</p>
+</section></section>
 <section id="some-examples" class="title-slide slide level1 center">
 <h1>Some examples</h1>
 
