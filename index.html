@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-03-16">
+  <meta name="dcterms.date" content="2026-03-17">
   <title>Hierarchical bayesian models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -341,7 +341,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-03-16</p>
+  <p class="date">2026-03-17</p>
 </section>
 <section>
 <section id="correlative-models" class="title-slide slide level1 center">
@@ -385,12 +385,21 @@ Géraldine Derroire
 </section>
 <section id="a-data-driven-approach" class="slide level2">
 <h2>A data-driven approach</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div>
 <ul>
 <li><p>Correlative models explain patterns observed in the data.</p></li>
 <li><p>They use statistical methods to fit model parameters to the data.</p></li>
 </ul>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="inventory.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div></div>
 </section>
 <section id="objectives-of-correlative-models" class="slide level2">
 <h2>Objectives of correlative models</h2>
@@ -424,7 +433,7 @@ Géraldine Derroire
 <li><p><span style="font-size: 30px">x is the explanatory variable</span></p></li>
 <li><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span> is the <strong>intercept</strong> (the mean of Y when X = 0)</span></p></li>
 <li><p><span style="font-size: 30px"><span class="math inline">\(\beta\)</span> is the <strong>slope</strong> of the relationship between X and Y</span></p></li>
-<li><p><span style="font-size: 30px"><span class="math inline">\(\epsilon_i\)</span> is the <strong>residual</strong> of the model. <span class="math inline">\(\epsilon_i \sim \mathcal N(0, \sigma^2)\)</span></span></p></li>
+<li><p><span style="font-size: 30px"><span class="math inline">\(\epsilon_i\)</span> is the <strong>residual</strong>. <span class="math inline">\(\epsilon_i \sim \mathcal N(0, \sigma^2)\)</span></span></p></li>
 </ul>
 </div>
 </div><div class="column" style="width:50%;">
@@ -455,7 +464,7 @@ Géraldine Derroire
 <p><span style="font-size: 30px">The model predicts a probability density of Y for any value of X normally distributed around the regression line.</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="lm.png" style="width:200.0%"> Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6" data-preview-link="false">E. Marcon</a>]{style=“font-size: 22px”}</p>
+<p><img data-src="lm.png" style="width:200.0%"> <span style="font-size: 22px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6">E. Marcon</a></span></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p><span style="font-size: 25px">The mean value of Y for any value of X is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
@@ -503,7 +512,7 @@ Géraldine Derroire
 <li class="fragment">success/failure data (<em>e.g</em>: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a <strong>binomial</strong> distribution</li>
 </ul>
 </div>
-<p><span class="fragment"><span style="font-size: 25px">To know more about these distributions: see the Wikipedia pages, and the <a href="https://ben18785.shinyapps.io/distribution-zoo/" data-preview-link="false">distribution zoo</a>.</span></span></p>
+<p><span style="font-size: 25px">To know more about these distributions: see the Wikipedia pages, and the <a href="https://ben18785.shinyapps.io/distribution-zoo/" data-preview-link="false">distribution zoo</a>.</span></p>
 </section>
 <section id="generalised-linear-models" class="slide level2 smaller">
 <h2>Generalised linear models</h2>
@@ -517,7 +526,7 @@ Géraldine Derroire
 <li><p><span style="font-size: 30px">a <strong>distribution</strong> of individual responses around their mean</span></p></li>
 <li><p><span style="font-size: 30px">a <strong>link function</strong> between the predictor (defined on <span class="math inline">\(\mathbb{R}\)</span>) and the mean response (not necessarily defined on <span class="math inline">\(\mathbb{R}\)</span>)</span></p></li>
 </ul>
-<p><span class="fragment"><span style="font-size: 25px">In the linear model seen before, the distribution is <em>Normal</em> and the link function the <em>identity</em>.</span></span></p>
+<p><span style="font-size: 25px">In the linear model seen before, the distribution is <em>Normal</em> and the link function the <em>identity</em>.</span></p>
 </div>
 </div>
 </section>
@@ -556,12 +565,12 @@ Géraldine Derroire
 <p><span class="math display">\[y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)\]</span></p>
 <p><span class="math display">\[\alpha_j \sim \mathcal N(\alpha + \color{turquoise}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})\]</span></p>
 <div class="fragment">
-<p><em>Eg: the response (<span class="math inline">\(\boldsymbol{y_{ij}}\)</span>) of individual trees <span class="math inline">\(\boldsymbol{i}\)</span> belonging to species <span class="math inline">\(\boldsymbol{j}\)</span> can be modeled with a species-level parameter (<span class="math inline">\(\boldsymbol{\alpha_j}\)</span></em>).</p>
-<p><em>These species-level parameters can then be modelled using functional traits (<span class="math inline">\(\boldsymbol{z_j}\)</span>).</em></p>
+<p><em>Eg: the response (</em><span class="math inline">\(\boldsymbol{y_{ij}}\)</span>) of individual trees <span class="math inline">\(\boldsymbol{i}\)</span> belonging to species <span class="math inline">\(\boldsymbol{j}\)</span> can be modeled with a species-level parameter (<span class="math inline">\(\boldsymbol{\alpha_j}\)</span>).</p>
+<p><em>These species-level parameters can then be modelled using functional traits (</em><span class="math inline">\(\boldsymbol{z_j}\)</span>).</p>
 <div>
 <ul>
-<li><p><em><strong><span class="math inline">\(\boldsymbol{\alpha}\)</span></strong> is the overall (community-level) intercept</em></p></li>
-<li><p><em><strong><span class="math inline">\(\boldsymbol{\beta_\alpha}\)</span></strong> is the effect of the trait on the species intercept</em></p></li>
+<li><p><span class="math inline">\(\boldsymbol{\alpha}\)</span> is the overall (community-level) intercept</p></li>
+<li><p><span class="math inline">\(\boldsymbol{\beta_\alpha}\)</span> is the effect of the trait on the species intercept</p></li>
 </ul>
 </div>
 </div>
@@ -571,25 +580,15 @@ Géraldine Derroire
 <h1>Bayesian framework</h1>
 
 </section>
-<section id="frequentist-vs-bayesian-approaches" class="slide level2">
-<h2>Frequentist <em>vs</em> Bayesian approaches</h2>
-<!-- to do et mettre plus bas -->
-<p>likelihood commune au deux</p>
-<p>“La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre.”</p>
-<p>qudn bcp de données =&gt; résultats proches</p>
-<ul>
-<li class="fragment"><p>Bayesian : credibility interval at X% =&gt; the true value of the parameter is with the credibility interval with a proba X</p></li>
-<li class="fragment"><p>Frequentist : confidence interval : if the experiment was repeated many times =&gt; X% of the intteravl would contain the true value of the parameter</p></li>
-</ul>
-</section>
 <section id="why-a-bayesian-approach" class="slide level2">
 <h2>Why a Bayesian approach?</h2>
 <!-- to check and think about, why not bayesian computing costly ???-->
 <ul>
-<li class="fragment"><p>to account for uncertainty (and propagagte it), as we get the uncertainty associated to each fitted parameters</p></li>
-<li class="fragment"><p>to leverage prior knowledge (previous studies or expert knowledge)</p></li>
-<li class="fragment"><p>for its flexibility (adapted to heterogeneous or uncomplete data, possible to fit complex models)</p></li>
+<li class="fragment"><p>to quantify <strong>uncertainty</strong> (and propagagte it), as we get a full fistribution for each fitted parameters</p></li>
+<li class="fragment"><p>to leverage <strong>prior knowledge</strong> (previous studies or expert knowledge)</p></li>
+<li class="fragment"><p>for its <strong>flexibility</strong> (adapted to heterogeneous or uncomplete data, possible to fit complex models)</p></li>
 </ul>
+<p><span class="fragment"><em>and why not a bayesian approach 🤨?</em> : more computationannly intensive</span></p>
 <aside class="notes">
 <p>complex models can be hierarchical, non linear, etc…</p>
 <style type="text/css">
@@ -604,7 +603,7 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="bayes-theorem" class="slide level2">
+<section id="bayes-theorem" class="slide level2 smaller">
 <h2>Bayes theorem</h2>
 <p>Theorem published by T. Bayes in 1763</p>
 <p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span> where</p>
@@ -615,6 +614,7 @@ Géraldine Derroire
 <li class="fragment"><span class="math inline">\({P(B)}\)</span> is the probability of B</li>
 </ul>
 <aside class="notes">
+<p>based on conditional proba</p>
 <p>old theorem =&gt; implementation limited by computing facilities</p>
 <p>P(A) is called marginal probability of A (ie proba of A alone)</p>
 <style type="text/css">
@@ -629,25 +629,22 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="bayes-theorem-1" class="slide level2">
-<h2>Bayes theorem</h2>
-<!-- TO FINISH : faire simple !!!!!! -->
-<p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span> <span class="math display">\[P(hypothesis|data) = \frac{P(data|hypothesis)*P(hypothesis)}{P(data)}\]</span> &gt; see if I keep the stage with the hyp or if I move direct to this (where <span class="math inline">\(\theta\)</span> is the parameter(s))</p>
-<p><span class="math display">\[P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}\]</span> * <span class="math inline">\(P(\theta|data)\)</span>: probability of <span class="math inline">\(\theta\)</span> given the data: this is the <strong>posterior distribution</strong></p>
+<section id="bayes-theorem-for-model-inference" class="slide level2 smaller">
+<h2>Bayes theorem for model inference</h2>
+<p>We want to infer parameter(s) <span class="math inline">\(\theta\)</span> using data:</p>
+<p><span class="math display">\[P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}\]</span> - <span class="math inline">\(P(\theta|data)\)</span>: probability of <span class="math inline">\(\theta\)</span> given the data: this is the <strong>posterior distribution</strong> of the parameter <span class="math inline">\(\theta\)</span></p>
 <ul>
 <li class="fragment"><p><span class="math inline">\(P(data|\theta)\)</span>: probability of the data given <span class="math inline">\(\theta\)</span>: this is the likelihood</p></li>
 <li class="fragment"><p><span class="math inline">\(P(\theta)\)</span>: probability of <span class="math inline">\(\theta\)</span> before knowing the data: this is the <strong>prior distribution</strong></p></li>
 <li class="fragment"><p><span class="math inline">\(P(data)\)</span>: a nomalising constant independant of <span class="math inline">\(\theta\)</span></p></li>
 </ul>
-<p>Our understanding of a phenomenon after observation <span class="math inline">\(P(hypothesis|data)\)</span> is our prior belief <span class="math inline">\(P(hypothesis)\)</span> updated by the evidence <span class="math inline">\(P(data|hypothesis)\)</span> <!-- to check how I frame this --></p>
-<p><span class="math display">\[posterior \propto prior*likelihood\]</span></p>
-<p><span class="math display">\[updated~belief \propto prior~belief*current~evidence\]</span></p>
-<!--explain why we get reed of the denominator-->
+<p><span class="fragment"><span class="math display">\[posterior \propto prior*likelihood\]</span></span></p>
 <aside class="notes">
 <p>Bayes theorem could be written as follow</p>
 <p>P(hyp|data) is what we want with our correlative approach</p>
 <p>likelihood, as in frequentist approach</p>
 <p>prior cannot depend on the data, it can be more or less informative, depending on what we already know</p>
+<p>the denominator can be hard to calculate with more than one parameters (multiple integral)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -659,10 +656,13 @@ Géraldine Derroire
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
-
- what I understand a psoteriori is my prior belief updated with the proof of eveidence
- -->
+</section>
+<section id="bayes-theorem-for-model-inference-1" class="slide level2">
+<h2>Bayes theorem for model inference</h2>
+<p>Our understanding of a phenomenon after observation <span class="math inline">\(P(hypothesis|data)\)</span> is</p>
+<p>our prior belief <span class="math inline">\(P(hypothesis)\)</span></p>
+<p>updated by the evidence <span class="math inline">\(P(data|hypothesis)\)</span></p>
+<p><span class="fragment"><span class="math inline">\(updated~belief \propto prior~belief*current~evidence\)</span></span></p>
 </section>
 <section id="fitting-the-model---mcmc-algorithm" class="slide level2">
 <h2>Fitting the model - MCMC algorithm</h2>
@@ -714,7 +714,38 @@ Géraldine Derroire
 </section>
 <section id="fitting-the-model---mcmc-algorithm-2" class="slide level2">
 <h2>Fitting the model - MCMC algorithm</h2>
-<p><img data-src="random_walk.png" class="quarto-figure quarto-figure-center"> Source: [Wikipedia]{https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm}{style=“font-size: 22px”}</p>
+
+<img data-src="random_walk.png" class="quarto-figure quarto-figure-center r-stretch"><p>Source: <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" style="font-size: 22px">Wikipedia</a></p>
+<aside class="notes">
+<p>we do this many time after a burn-in period</p>
+<p>and with several chains</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fitting-the-model---mcmc-algorithm-3" class="slide level2">
+<h2>Fitting the model - MCMC algorithm</h2>
+<p>several chains, convergence after burn-in phase</p>
+<p><img data-src="convergence.png" class="quarto-figure quarto-figure-center"> Source: <a href="https://drvalle1.github.io/20_MCMC_convergence.html" style="font-size: 22px">D. Valle 2023</a></p>
+</section>
+<section id="frequentist-vs-bayesian-approaches" class="slide level2">
+<h2>Frequentist <em>vs</em> Bayesian approaches</h2>
+<!-- to do et mettre plus bas -->
+<p>likelihood commune au deux</p>
+<p>“La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre.”</p>
+<p>qudn bcp de données =&gt; résultats proches</p>
+<ul>
+<li class="fragment"><p>Bayesian : credibility interval at X% =&gt; the true value of the parameter is with the credibility interval with a proba X</p></li>
+<li class="fragment"><p>Frequentist : confidence interval : if the experiment was repeated many times =&gt; X% of the intteravl would contain the true value of the parameter</p></li>
+</ul>
 </section></section>
 <section id="some-examples" class="title-slide slide level1 center">
 <h1>Some examples</h1>
@@ -723,6 +754,15 @@ Géraldine Derroire
 
 <section id="conclusion" class="title-slide slide level1 center">
 <h1>Conclusion</h1>
+
+</section>
+
+<section id="references" class="title-slide slide level1 center">
+<h1>References</h1>
+<p>On Bayesian approach</p>
+<ul>
+<li class="fragment">Gimenez, O. <em>et al</em> 2025. <em>Ten quick tips to get you started with Bayesian statistics</em>. PLOS Computational Biology 21, <a href="https://doi.org/10.1371/journal.pcbi.1012898">e1012898.</a></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

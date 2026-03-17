@@ -27,7 +27,6 @@ library(dplyr)
 library(tidyr)
 ```
 
-
 # Correlative models
 
 ::: notes
@@ -52,18 +51,26 @@ this is not exclusive to the context of bayesian modelling
 
 ## A data-driven approach
 
-::: {.nonincremental}
+:::::: columns
+:::: {.column width="50%"}
+::: nonincremental
 -   Correlative models explain patterns observed in the data.
 
--  They use statistical methods to fit model parameters to the data.
+-   They use statistical methods to fit model parameters to the data.
 :::
+::::
+
+::: {.column width="50%"}
+![](inventory.png){fig-align="center"}
+:::
+::::::
 
 ## Objectives of correlative models
 
-::: {.nonincremental}
+::::: nonincremental
 ::: fragment
--  **Hypothesis testing**: identify factors associated with observed patterns
- 
+-   **Hypothesis testing**: identify factors associated with observed patterns
+
 *Eg: Does tree growth decrease with drought?*
 :::
 
@@ -72,42 +79,33 @@ this is not exclusive to the context of bayesian modelling
 
 *Eg: Predict tree growth under a given climate*
 :::
-
-:::
+:::::
 
 ::: fragment
 ⚠️ Predictions are reliable only if the model remains valid in the considered conditions.
 :::
 
-
 ## Example of the linear model
-
 
 $$y_i = \alpha + \beta \times x_i + \epsilon_i$$
 
-::: {.nonincremental}
-
-::::: columns
-::: {.column width="50%"}
-
+:::::::: nonincremental
+::::::: columns
+:::: {.column width="50%"}
 ::: fragment
+-   [y is the response variable]{style="font-size: 30px"}
 
-* [y is the response variable]{style="font-size: 30px"}
+-   [x is the explanatory variable]{style="font-size: 30px"}
 
-* [x is the explanatory variable]{style="font-size: 30px"}
+-   [$\alpha$ is the **intercept** (the mean of Y when X = 0)]{style="font-size: 30px"}
 
-* [$\alpha$ is the **intercept** (the mean of Y when X = 0)]{style="font-size: 30px"}
+-   [$\beta$ is the **slope** of the relationship between X and Y]{style="font-size: 30px"}
 
-* [$\beta$ is the **slope** of the relationship between X and Y]{style="font-size: 30px"}
-
-* [$\epsilon_i$ is the **residual** of the model. $\epsilon_i \sim \mathcal N(0, \sigma^2)$]{style="font-size: 30px"}
-
+-   [$\epsilon_i$ is the **residual**. $\epsilon_i \sim \mathcal N(0, \sigma^2)$]{style="font-size: 30px"}
 :::
+::::
 
-:::
-
-::: {.column width="50%"}
-
+:::: {.column width="50%"}
 ::: fragment
 [$\alpha$, $\beta$ and $\sigma$ are the **parameters** of the model]{style="font-size: 30px"}
 
@@ -115,36 +113,29 @@ $$y_i = \alpha + \beta \times x_i + \epsilon_i$$
 
 $$y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)$$
 :::
-:::
-:::::
-
-:::
+::::
+:::::::
+::::::::
 
 ::: notes
 who want to write the equation of the model we want to fit on the blackboard?
 :::
 
-
 ## Example of the linear model
 
 $$y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)$$
 
-[The model predicts a probability density of Y  for any value of X normally distributed around the regression line.]{style="font-size: 30px"}
+[The model predicts a probability density of Y for any value of X normally distributed around the regression line.]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
-
-![](lm.png){width="200%"}
-Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6){preview-link="false"}]{style="font-size: 22px"}
+![](lm.png){width="200%"} [Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6)]{style="font-size: 22px"}
 :::
 
-
 ::: {.column width="50%"}
-* [The mean value of Y for any value of X is the black line : $\mu = \alpha + \beta \times x$]{style="font-size: 25px"}
+-   [The mean value of Y for any value of X is the black line : $\mu = \alpha + \beta \times x$]{style="font-size: 25px"}
 
-* [The predicted probability density of Y are represented by the red dots: they are normally distributed around the mean with a variance $\sigma^2$]{style="font-size: 25px"}
-
-
+-   [The predicted probability density of Y are represented by the red dots: they are normally distributed around the mean with a variance $\sigma^2$]{style="font-size: 25px"}
 :::
 :::::
 
@@ -152,9 +143,8 @@ Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineai
 read the fig as in 3D
 :::
 
-
 ::: notes
-for prediction : need to think of good validation of the model => ex for distribution model do spatial cross-validation
+for prediction : need to think of good validation of the model =\> ex for distribution model do spatial cross-validation
 
 Be careful when applying the model to conditions outside of the range of calibration (eg for climate change)
 :::
@@ -164,15 +154,14 @@ Be careful when applying the model to conditions outside of the range of calibra
 Some data are by nature not normally distributed, so we cannot model them with a normal distribution.
 
 ::: fragment
-* count data (*e.g.*: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a **Poisson** distribution
+-   count data (*e.g.*: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a **Poisson** distribution
 :::
 
 ::: fragment
-* success/failure data (*e.g*: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a **binomial** distribution
+-   success/failure data (*e.g*: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a **binomial** distribution
 :::
 
-[[To know more about these distributions: see the Wikipedia pages, and the [distribution zoo](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}.]{style="font-size: 25px"}]{.fragment}
-
+[To know more about these distributions: see the Wikipedia pages, and the [distribution zoo](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}.]{style="font-size: 25px"}
 
 ## Generalised linear models {.smaller}
 
@@ -180,59 +169,50 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 *Generalised linear models* (**GLM**) are an extension of linear models allowing different distributions of the response variable.
 
-::: {.nonincremental}
-
+:::: nonincremental
 ::: fragment
-
 [They have 3 component:]{style="font-size: 30px"}
 
-* [a **linear predictor**: a linear combination of explanatory variables]{style="font-size: 30px"}
+-   [a **linear predictor**: a linear combination of explanatory variables]{style="font-size: 30px"}
 
-* [a **distribution** of individual responses around their mean]{style="font-size: 30px"}
+-   [a **distribution** of individual responses around their mean]{style="font-size: 30px"}
 
-* [a **link function** between the predictor (defined on $\mathbb{R}$) and the mean response (not necessarily defined on $\mathbb{R}$)]{style="font-size: 30px"}
+-   [a **link function** between the predictor (defined on $\mathbb{R}$) and the mean response (not necessarily defined on $\mathbb{R}$)]{style="font-size: 30px"}
 
-[[In the linear model seen before, the distribution is *Normal* and the link function the *identity*.]{style="font-size: 25px"}]{.fragment}
-
+[In the linear model seen before, the distribution is *Normal* and the link function the *identity*.]{style="font-size: 25px"}
 :::
+::::
 
-:::
-
-## What if the observations are not independent?  {.smaller}
+## What if the observations are not independent? {.smaller}
 
 An linear regression assumes that all observations are **independent**.
 
 When observations are grouped, they are not independent (*e.g.* several observations on a same site, on a same individual, in a same year...).
 
-* We can include the group as a categorical explanatory variable. This evaluate the effect of each group.
+-   We can include the group as a categorical explanatory variable.
+    This evaluate the effect of each group.
 
-* When the number of groups is too high and we are not interested in the effect of each group, we can use a **linear mixed model**, which is a simple form of **hierarchical model**.
-
+-   When the number of groups is too high and we are not interested in the effect of each group, we can use a **linear mixed model**, which is a simple form of **hierarchical model**.
 
 ## Hierarchical model {.smaller}
 
 [Linear mixed models have a hierarchical structure.]{style="font-size: 30px"}
 
 ::: fragment
-
 [One or more of their coefficients (the intercept or the response to explanatory variables) varies between groups *j*:]{style="font-size: 30px"}
 
 $$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
 :::
 
 ::: fragment
-
 [and this variation is modelled by a group-level distribution:]{style="font-size: 30px"}
 
 $$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
 
-[The group-specific intercepts are not independent parameters:
-they are drawn from a common distribution.]{style="font-size: 30px"}
+[The group-specific intercepts are not independent parameters: they are drawn from a common distribution.]{style="font-size: 30px"}
 
 [*NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.*]{style="font-size: 22px"}
-
 :::
-
 
 ## Hierarchical model
 
@@ -296,65 +276,46 @@ ggplot(dat, aes(x, y, color = group)) +
 
 More complex hierarchical models can include covariates in the group-level distribution:
 
-
 $$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
 
 $$\alpha_j \sim \mathcal N(\alpha + \color{turquoise}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})$$
 
-::: {.fragment}
+:::: fragment
+*Eg: the response (*$\boldsymbol{y_{ij}}$) of individual trees $\boldsymbol{i}$ belonging to species $\boldsymbol{j}$ can be modeled with a species-level parameter ($\boldsymbol{\alpha_j}$).
 
-*Eg: the response ($\boldsymbol{y_{ij}}$) of individual trees $\boldsymbol{i}$ belonging to species $\boldsymbol{j}$  can be modeled with a species-level parameter ($\boldsymbol{\alpha_j}$*).
+*These species-level parameters can then be modelled using functional traits (*$\boldsymbol{z_j}$).
 
-*These species-level parameters can then be modelled using functional traits ($\boldsymbol{z_j}$).*
+::: nonincremental
+-   $\boldsymbol{\alpha}$ is the overall (community-level) intercept
 
-::: {.nonincremental}
-
-* ***$\boldsymbol{\alpha}$** is the overall (community-level) intercept*
-
-* ***$\boldsymbol{\beta_\alpha}$** is the effect of the trait on the species intercept*
-
+-   $\boldsymbol{\beta_\alpha}$ is the effect of the trait on the species intercept
 :::
-
-:::
+::::
 
 # Bayesian framework
-
-## Frequentist *vs* Bayesian approaches
-
-<!-- to do et mettre plus bas -->
-
-likelihood commune au deux
-
-"La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre."
-
-qudn bcp de données => résultats proches
-
-* Bayesian : credibility interval at X% => the true value of the parameter is with the credibility interval with a proba X 
-
-* Frequentist : confidence interval : if the experiment was repeated many times => X% of the intteravl would contain the true value of the parameter
 
 ## Why a Bayesian approach?
 
 <!-- to check and think about, why not bayesian computing costly ???-->
 
-* to account for uncertainty (and propagagte it), as we get the uncertainty associated to each fitted parameters
+-   to quantify **uncertainty** (and propagagte it), as we get a full fistribution for each fitted parameters
 
-* to leverage prior knowledge (previous studies or expert knowledge)
+-   to leverage **prior knowledge** (previous studies or expert knowledge)
 
-* for its flexibility (adapted to heterogeneous or uncomplete data, possible to fit complex models)
+-   for its **flexibility** (adapted to heterogeneous or uncomplete data, possible to fit complex models)
 
+[*and why not a bayesian approach 🤨?* : more computationannly intensive]{.fragment} 
 
 ::: notes
 complex models can be hierarchical, non linear, etc...
 :::
 
+## Bayes theorem {.smaller}
 
-## Bayes theorem
+Theorem published by T.
+Bayes in 1763
 
-Theorem published by T. Bayes in 1763
-
-$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
-where
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$ where
 
 -   $P(A|B)$ is the probability of A given B
 -   $P(B|A)$ is the probability of B given A
@@ -362,69 +323,65 @@ where
 -   ${P(B)}$ is the probability of B
 
 ::: notes
-old theorem => implementation limited by computing facilities
+based on conditional proba
+
+old theorem =\> implementation limited by computing facilities
 
 P(A) is called marginal probability of A (ie proba of A alone)
 :::
 
+## Bayes theorem for model inference {.smaller}
 
-## Bayes theorem
+We want to infer parameter(s) $\theta$ using data:
 
-<!-- TO FINISH : faire simple !!!!!! --> 
+$$P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}$$ 
+- $P(\theta|data)$: probability of $\theta$ given the data: this is the **posterior distribution** of the parameter $\theta$
 
-$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
-$$P(hypothesis|data) = \frac{P(data|hypothesis)*P(hypothesis)}{P(data)}$$
-> see if I keep the stage with the hyp or if I move direct to this (where $\theta$ is the parameter(s))
+- $P(data|\theta)$: probability of the data given $\theta$: this is the likelihood
 
-$$P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}$$
-* $P(\theta|data)$: probability of $\theta$ given the data: this is the **posterior distribution**
+- $P(\theta)$: probability of $\theta$ before knowing the data: this is the **prior distribution**
 
-* $P(data|\theta)$: probability of the data given $\theta$: this is the likelihood
-
-* $P(\theta)$: probability of $\theta$ before knowing the data: this is the **prior distribution**
-
-* $P(data)$: a nomalising constant independant of $\theta$
-
-Our understanding of a phenomenon after observation $P(hypothesis|data)$ is our prior belief $P(hypothesis)$
-updated by the evidence $P(data|hypothesis)$
-<!-- to check how I frame this -->
-
-$$posterior \propto prior*likelihood$$
-
-$$updated~belief \propto prior~belief*current~evidence$$
+- $P(data)$: a nomalising constant independant of $\theta$
 
 
-<!--explain why we get reed of the denominator-->
+[$$posterior \propto prior*likelihood$$]{.fragment}
 
 ::: notes
 Bayes theorem could be written as follow
 
-P(hyp|data) is what we want with our correlative approach
+P(hyp\|data) is what we want with our correlative approach
 
 likelihood, as in frequentist approach
 
 prior cannot depend on the data, it can be more or less informative, depending on what we already know
-::: 
+
+the denominator can be hard to calculate with more than one parameters (multiple integral)
+:::
 
 
-<!-- Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
+## Bayes theorem for model inference
 
- what I understand a psoteriori is my prior belief updated with the proof of eveidence
- -->
- 
+Our understanding of a phenomenon after observation $P(hypothesis|data)$ is 
+
+our prior belief $P(hypothesis)$ 
+
+updated by the evidence $P(data|hypothesis)$ 
+
+
+[$updated~belief \propto prior~belief*current~evidence$]{.fragment}
+
 
 ## Fitting the model - MCMC algorithm
 
 Markov Chain Monte Carlo
 
-method of simulations to approximate the posterior distributions => 
+method of simulations to approximate the posterior distributions =\>
 
 ::: notes
 most of the time, it is difficult / impossible to calculate the posterior distributions, so we need to approximate it through simulation
 
-markow chain => to get a stationary distribution that is the posterior distribution of the parameters
+markow chain =\> to get a stationary distribution that is the posterior distribution of the parameters
 :::
-
 
 ## Fitting the model - MCMC algorithm
 
@@ -432,31 +389,29 @@ markow chain => to get a stationary distribution that is the posterior distribut
 
 2- Randomly choose new *candidate* values for the parameters using a random walk function
 
-3- Calculate the ratio of posterior probabilities $R = \frac{P(posterior_{candidate})}{P(posterior_{current})}$ from the likelihoods and the prior probabilities 
+3- Calculate the ratio of posterior probabilities $R = \frac{P(posterior_{candidate})}{P(posterior_{current})}$ from the likelihoods and the prior probabilities
 
 4- Accept or reject the candidate value
 
-* if R > 1 (candidate more likely) => accept
+-   if R \> 1 (candidate more likely) =\> accept
 
-* if R < 1 (candidate less likely) => accept if X drawn in $\mathcal{U}[0,1]$ < R (*this avoid getting stuck in a local maximum of likelihood*), reject otherwise
+-   if R \< 1 (candidate less likely) =\> accept if X drawn in $\mathcal{U}[0,1]$ \< R (*this avoid getting stuck in a local maximum of likelihood*), reject otherwise
 
 5- Repeat steps 2 to 4 thousands of times
 
- 
-
+```{=html}
 <!-- voir comment sont choisiées les vakeurs d'initialisation
 -->
-
+```
 
 ::: notes
-! the initialisation value is NOT the prior, it's the first value of theta. But it needs to be compatible with the prior.
+! the initialisation value is NOT the prior, it's the first value of theta.
+But it needs to be compatible with the prior.
 
-random walk => EXPLIQUER COMMENT LA TAILLE DES PAS EST DECIDEE
+random walk =\> EXPLIQUER COMMENT LA TAILLE DES PAS EST DECIDEE
 
 the proba of acception a less likely value is proportional to R
-
 :::
-
 
 ## Fitting the model - MCMC algorithm
 
@@ -470,8 +425,32 @@ we do this many time after a burn-in period
 and with several chains
 :::
 
+## Fitting the model - MCMC algorithm
 
+several chains, convergence after burn-in phase
+
+![](convergence.png){fig-align="center"} Source: [D. Valle 2023](https://drvalle1.github.io/20_MCMC_convergence.html){style="font-size: 22px"}
+
+## Frequentist *vs* Bayesian approaches
+
+<!-- to do et mettre plus bas -->
+
+likelihood commune au deux
+
+"La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre."
+
+qudn bcp de données =\> résultats proches
+
+-   Bayesian : credibility interval at X% =\> the true value of the parameter is with the credibility interval with a proba X
+
+-   Frequentist : confidence interval : if the experiment was repeated many times =\> X% of the intteravl would contain the true value of the parameter
 
 # Some examples
 
 # Conclusion
+
+# References
+
+On Bayesian approach
+
+-   Gimenez, O. *et al* 2025. *Ten quick tips to get you started with Bayesian statistics*. PLOS Computational Biology 21, [e1012898.](https://doi.org/10.1371/journal.pcbi.1012898)

@@ -1,0 +1,43 @@
+---
+title: "unused"
+format: html
+---
+
+## Bayes theorem {.scrollable}
+
+<!-- TO FINISH : faire simple !!!!!! -->
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$ $$P(hypothesis|data) = \frac{P(data|hypothesis)*P(hypothesis)}{P(data)}$$ \> see if I keep the stage with the hyp or if I move direct to this (where $\theta$ is the parameter(s))
+
+$$P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}$$ \* $P(\theta|data)$: probability of $\theta$ given the data: this is the **posterior distribution**
+
+-   $P(data|\theta)$: probability of the data given $\theta$: this is the likelihood
+
+-   $P(\theta)$: probability of $\theta$ before knowing the data: this is the **prior distribution**
+
+-   $P(data)$: a nomalising constant independant of $\theta$
+
+Our understanding of a phenomenon after observation $P(hypothesis|data)$ is our prior belief $P(hypothesis)$ updated by the evidence $P(data|hypothesis)$ <!-- to check how I frame this -->
+
+$$posterior \propto prior*likelihood$$
+
+$$updated~belief \propto prior~belief*current~evidence$$
+
+<!--explain why we get reed of the denominator-->
+
+::: notes
+Bayes theorem could be written as follow
+
+P(hyp\|data) is what we want with our correlative approach
+
+likelihood, as in frequentist approach
+
+prior cannot depend on the data, it can be more or less informative, depending on what we already know
+:::
+
+```{=html}
+<!-- Bayes theorem (very briefly, based on the draft course started by Sylvain) => show how the data allow updating the prior and get a posterior, so how we can use our prior knowledge
+
+ what I understand a psoteriori is my prior belief updated with the proof of eveidence
+ -->
+```
