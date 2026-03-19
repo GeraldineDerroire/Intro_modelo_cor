@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-03-17">
+  <meta name="dcterms.date" content="2026-03-19">
   <title>Hierarchical bayesian models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -341,7 +341,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-03-17</p>
+  <p class="date">2026-03-19</p>
 </section>
 <section>
 <section id="correlative-models" class="title-slide slide level1 center">
@@ -563,7 +563,7 @@ Géraldine Derroire
 <h2>Hierarchical model</h2>
 <p>More complex hierarchical models can include covariates in the group-level distribution:</p>
 <p><span class="math display">\[y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)\]</span></p>
-<p><span class="math display">\[\alpha_j \sim \mathcal N(\alpha + \color{turquoise}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})\]</span></p>
+<p><span class="math display">\[\alpha_j \sim \mathcal N(\alpha + \color{OrangeRed}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})\]</span></p>
 <div class="fragment">
 <p><em>Eg: the response (</em><span class="math inline">\(\boldsymbol{y_{ij}}\)</span>) of individual trees <span class="math inline">\(\boldsymbol{i}\)</span> belonging to species <span class="math inline">\(\boldsymbol{j}\)</span> can be modeled with a species-level parameter (<span class="math inline">\(\boldsymbol{\alpha_j}\)</span>).</p>
 <p><em>These species-level parameters can then be modelled using functional traits (</em><span class="math inline">\(\boldsymbol{z_j}\)</span>).</p>
@@ -606,12 +606,12 @@ Géraldine Derroire
 <section id="bayes-theorem" class="slide level2 smaller">
 <h2>Bayes theorem</h2>
 <p>Theorem published by T. Bayes in 1763</p>
-<p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span> where</p>
+<p><span class="math display">\[\color{crimson}{P(A|B)} = \frac{\color{slateblue}{P(B|A)} \times \color{orange}{P(A)}}{\color{lightseagreen}{P(B)}}\]</span> where</p>
 <ul>
-<li class="fragment"><span class="math inline">\(P(A|B)\)</span> is the probability of A given B</li>
-<li class="fragment"><span class="math inline">\(P(B|A)\)</span> is the probability of B given A</li>
-<li class="fragment"><span class="math inline">\({P(A)}\)</span> is the probability of A</li>
-<li class="fragment"><span class="math inline">\({P(B)}\)</span> is the probability of B</li>
+<li class="fragment"><span class="math inline">\(\color{crimson}{P(A|B)}\)</span> is the probability of A given B</li>
+<li class="fragment"><span class="math inline">\(\color{slateblue}{P(B|A)}\)</span> is the probability of B given A</li>
+<li class="fragment"><span class="math inline">\(\color{orange}{P(A)}\)</span> is the probability of A</li>
+<li class="fragment"><span class="math inline">\(\color{lightseagreen}{P(B)}\)</span> is the probability of B</li>
 </ul>
 <aside class="notes">
 <p>based on conditional proba</p>
@@ -632,13 +632,13 @@ Géraldine Derroire
 <section id="bayes-theorem-for-model-inference" class="slide level2 smaller">
 <h2>Bayes theorem for model inference</h2>
 <p>We want to infer parameter(s) <span class="math inline">\(\theta\)</span> using data:</p>
-<p><span class="math display">\[P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}\]</span> - <span class="math inline">\(P(\theta|data)\)</span>: probability of <span class="math inline">\(\theta\)</span> given the data: this is the <strong>posterior distribution</strong> of the parameter <span class="math inline">\(\theta\)</span></p>
+<p><span class="math display">\[\color{crimson}{P(\theta|data)} = \frac{\color{slateblue}{P(data|\theta)} \times \color{orange}{P(\theta)}}{\color{lightseagreen}{P(data)}}\]</span></p>
 <ul>
-<li class="fragment"><p><span class="math inline">\(P(data|\theta)\)</span>: probability of the data given <span class="math inline">\(\theta\)</span>: this is the likelihood</p></li>
-<li class="fragment"><p><span class="math inline">\(P(\theta)\)</span>: probability of <span class="math inline">\(\theta\)</span> before knowing the data: this is the <strong>prior distribution</strong></p></li>
-<li class="fragment"><p><span class="math inline">\(P(data)\)</span>: a nomalising constant independant of <span class="math inline">\(\theta\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\color{crimson}{P(\theta|data)}\)</span>: probability of <span class="math inline">\(\theta\)</span> given the data =&gt; this is the <strong>posterior distribution</strong> of the parameter <span class="math inline">\(\theta\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\color{slateblue}{P(data|\theta)}\)</span>: probability of the data given <span class="math inline">\(\theta\)</span> =&gt; this is the <strong>likelihood</strong></p></li>
+<li class="fragment"><p><span class="math inline">\(\color{orange}{P(\theta)}\)</span>: probability of <span class="math inline">\(\theta\)</span> before knowing the data =&gt; this is the <strong>prior distribution</strong></p></li>
+<li class="fragment"><p><span class="math inline">\(\color{lightseagreen}{P(data)}\)</span>: a nomalising constant independant of <span class="math inline">\(\theta\)</span></p></li>
 </ul>
-<p><span class="fragment"><span class="math display">\[posterior \propto prior*likelihood\]</span></span></p>
 <aside class="notes">
 <p>Bayes theorem could be written as follow</p>
 <p>P(hyp|data) is what we want with our correlative approach</p>
@@ -659,15 +659,13 @@ Géraldine Derroire
 </section>
 <section id="bayes-theorem-for-model-inference-1" class="slide level2">
 <h2>Bayes theorem for model inference</h2>
-<p>Our understanding of a phenomenon after observation <span class="math inline">\(P(hypothesis|data)\)</span> is</p>
-<p>our prior belief <span class="math inline">\(P(hypothesis)\)</span></p>
-<p>updated by the evidence <span class="math inline">\(P(data|hypothesis)\)</span></p>
-<p><span class="fragment"><span class="math inline">\(updated~belief \propto prior~belief*current~evidence\)</span></span></p>
+<p><span class="math display">\[\color{crimson}{posterior} \propto \color{slateblue}{likelihood} \times \color{orange}{prior}\]</span></p>
+<p>Our <span style="color: crimson;">understanding of a phenomenon after observation</span> is our <span style="color: orange;">prior belief</span> updated by the <span style="color: slateblue;">evidence</span>.</p>
 </section>
 <section id="fitting-the-model---mcmc-algorithm" class="slide level2">
 <h2>Fitting the model - MCMC algorithm</h2>
-<p>Markov Chain Monte Carlo</p>
-<p>method of simulations to approximate the posterior distributions =&gt;</p>
+<p>Most of the time, it is impossible to calculate the posterior distribution.</p>
+<p>We use Markov Chain Monte Carlo (MCMC) algorithm to approximate the posterior distributions through simulations.</p>
 <aside class="notes">
 <p>most of the time, it is difficult / impossible to calculate the posterior distributions, so we need to approximate it through simulation</p>
 <p>markow chain =&gt; to get a stationary distribution that is the posterior distribution of the parameters</p>
@@ -683,23 +681,28 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="fitting-the-model---mcmc-algorithm-1" class="slide level2">
+<section id="fitting-the-model---mcmc-algorithm-1" class="slide level2 smaller">
 <h2>Fitting the model - MCMC algorithm</h2>
-<p>1- Initialisation: first values of the parameters (<em>current</em>)</p>
-<p>2- Randomly choose new <em>candidate</em> values for the parameters using a random walk function</p>
-<p>3- Calculate the ratio of posterior probabilities <span class="math inline">\(R = \frac{P(posterior_{candidate})}{P(posterior_{current})}\)</span> from the likelihoods and the prior probabilities</p>
-<p>4- Accept or reject the candidate value</p>
+<div>
+<ol type="1">
+<li class="fragment"><p>Initiate the chain: first values of the parameters (<em>current</em>)</p></li>
+<li class="fragment"><p>Randomly choose new <em>candidate</em> values for the parameters using a random walk function</p></li>
+<li class="fragment"><p>Calculate the ratio of posterior probabilities <span class="math inline">\(R = \frac{P(posterior_{candidate})}{P(posterior_{current})}\)</span> from the likelihoods and the prior probabilities</p></li>
+<li class="fragment"><p>Accept ✅ or reject ❌ the candidate value</p>
 <ul>
-<li class="fragment"><p>if R &gt; 1 (candidate more likely) =&gt; accept</p></li>
-<li class="fragment"><p>if R &lt; 1 (candidate less likely) =&gt; accept if X drawn in <span class="math inline">\(\mathcal{U}[0,1]\)</span> &lt; R (<em>this avoid getting stuck in a local maximum of likelihood</em>), reject otherwise</p></li>
-</ul>
-<p>5- Repeat steps 2 to 4 thousands of times</p>
-<!-- voir comment sont choisiées les vakeurs d'initialisation
--->
+<li class="fragment"><p>if R &gt; 1 (candidate more likely) ✅</p></li>
+<li class="fragment"><p>if R &lt; 1 (candidate less likely)</p>
+<p>✅ if X &lt; R, with X drawn in <span class="math inline">\(\mathcal{U}[0,1]\)</span></p>
+<p>❌ otherwise</p></li>
+</ul></li>
+<li class="fragment"><p>Repeat steps 2 to 4 thousands of times</p></li>
+</ol>
+</div>
 <aside class="notes">
-<p>! the initialisation value is NOT the prior, it’s the first value of theta. But it needs to be compatible with the prior.</p>
-<p>random walk =&gt; EXPLIQUER COMMENT LA TAILLE DES PAS EST DECIDEE</p>
-<p>the proba of acception a less likely value is proportional to R</p>
+<p>! the initialisation value is NOT the prior, it’s the first value of theta. But it needs to be compatible with the prior. In practise, choosen by the software by default.</p>
+<p>random walk: the size of the step is choosen to be reasonable * too small: the chain moves very slowly * too big: we can get stuck</p>
+<p>we accept sometimes when R&lt;1 to <em>avoid getting stuck in a local maximum of likelihood</em></p>
+<p>the proba of acception is proportional to R</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -715,7 +718,13 @@ Géraldine Derroire
 <section id="fitting-the-model---mcmc-algorithm-2" class="slide level2">
 <h2>Fitting the model - MCMC algorithm</h2>
 
-<img data-src="random_walk.png" class="quarto-figure quarto-figure-center r-stretch"><p>Source: <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm" style="font-size: 22px">Wikipedia</a></p>
+<img data-src="random_walk.png" class="quarto-figure quarto-figure-center r-stretch"><p><span style="font-size: 22px">Source: <a href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm">Wikipedia</a></span></p>
+</section>
+<section id="fitting-the-model---mcmc-algorithm-3" class="slide level2">
+<h2>Fitting the model - MCMC algorithm</h2>
+<p>In practice, we assess the convergence of several chains, after a burn-in phase.</p>
+
+<img data-src="convergence.png" class="quarto-figure quarto-figure-center r-stretch"><p><span style="font-size: 22px">Source: <a href="https://drvalle1.github.io/20_MCMC_convergence.html">D. Valle 2023</a></span></p>
 <aside class="notes">
 <p>we do this many time after a burn-in period</p>
 <p>and with several chains</p>
@@ -731,21 +740,49 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="fitting-the-model---mcmc-algorithm-3" class="slide level2">
-<h2>Fitting the model - MCMC algorithm</h2>
-<p>several chains, convergence after burn-in phase</p>
-<p><img data-src="convergence.png" class="quarto-figure quarto-figure-center"> Source: <a href="https://drvalle1.github.io/20_MCMC_convergence.html" style="font-size: 22px">D. Valle 2023</a></p>
-</section>
-<section id="frequentist-vs-bayesian-approaches" class="slide level2">
+<section id="frequentist-vs-bayesian-approaches" class="slide level2 smaller">
 <h2>Frequentist <em>vs</em> Bayesian approaches</h2>
-<!-- to do et mettre plus bas -->
-<p>likelihood commune au deux</p>
-<p>“La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre.”</p>
-<p>qudn bcp de données =&gt; résultats proches</p>
+<p>Both approaches use the <strong>likelihood</strong> (the data model)</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Frequentist approach</strong></p>
+<div>
 <ul>
-<li class="fragment"><p>Bayesian : credibility interval at X% =&gt; the true value of the parameter is with the credibility interval with a proba X</p></li>
-<li class="fragment"><p>Frequentist : confidence interval : if the experiment was repeated many times =&gt; X% of the intteravl would contain the true value of the parameter</p></li>
+<li><p>estimates a single but uncertain value for each parameter</p></li>
+<li><p>uncertainty is described with a <strong>confidence interval</strong></p></li>
 </ul>
+<p><em>If the experiment were repeated many times, X% of the intervals would contain the true value</em>.</p>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p><strong>Bayesian approach</strong></p>
+<div>
+<ul>
+<li><p>estimates a <strong>distribution</strong> for each parameter</p></li>
+<li><p>uncertainty is described with a <strong>credible interval</strong></p></li>
+</ul>
+<p><em>The probability that the true value lies in the interval is X%</em>.</p>
+</div>
+</div>
+</div></div>
+<p><span class="fragment">When the amount of data is large, results are often very similar.</span></p>
+<aside class="notes">
+<p>Frequentist optimise the likelihood Bayesian combine it with prior</p>
+<p>if experiment was repeated many times =&gt; generating new data</p>
+<p>the bayesian interpretation is more intuitive</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="some-examples" class="title-slide slide level1 center">
 <h1>Some examples</h1>

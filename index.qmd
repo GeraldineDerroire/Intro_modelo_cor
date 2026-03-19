@@ -278,7 +278,7 @@ More complex hierarchical models can include covariates in the group-level distr
 
 $$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
 
-$$\alpha_j \sim \mathcal N(\alpha + \color{turquoise}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})$$
+$$\alpha_j \sim \mathcal N(\alpha + \color{OrangeRed}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})$$
 
 :::: fragment
 *Eg: the response (*$\boldsymbol{y_{ij}}$) of individual trees $\boldsymbol{i}$ belonging to species $\boldsymbol{j}$ can be modeled with a species-level parameter ($\boldsymbol{\alpha_j}$).
@@ -304,7 +304,7 @@ $$\alpha_j \sim \mathcal N(\alpha + \color{turquoise}{\beta_\alpha \times z_j}, 
 
 -   for its **flexibility** (adapted to heterogeneous or uncomplete data, possible to fit complex models)
 
-[*and why not a bayesian approach 🤨?* : more computationannly intensive]{.fragment} 
+[*and why not a bayesian approach 🤨?* : more computationannly intensive]{.fragment}
 
 ::: notes
 complex models can be hierarchical, non linear, etc...
@@ -315,12 +315,12 @@ complex models can be hierarchical, non linear, etc...
 Theorem published by T.
 Bayes in 1763
 
-$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$ where
+$$\color{crimson}{P(A|B)} = \frac{\color{slateblue}{P(B|A)} \times \color{orange}{P(A)}}{\color{lightseagreen}{P(B)}}$$ where
 
--   $P(A|B)$ is the probability of A given B
--   $P(B|A)$ is the probability of B given A
--   ${P(A)}$ is the probability of A
--   ${P(B)}$ is the probability of B
+-   $\color{crimson}{P(A|B)}$ is the probability of A given B
+-   $\color{slateblue}{P(B|A)}$ is the probability of B given A
+-   $\color{orange}{P(A)}$ is the probability of A
+-   $\color{lightseagreen}{P(B)}$ is the probability of B
 
 ::: notes
 based on conditional proba
@@ -334,17 +334,15 @@ P(A) is called marginal probability of A (ie proba of A alone)
 
 We want to infer parameter(s) $\theta$ using data:
 
-$$P(\theta|data) = \frac{P(data|\theta)*P(\theta)}{P(data)}$$ 
-- $P(\theta|data)$: probability of $\theta$ given the data: this is the **posterior distribution** of the parameter $\theta$
+$$\color{crimson}{P(\theta|data)} = \frac{\color{slateblue}{P(data|\theta)} \times \color{orange}{P(\theta)}}{\color{lightseagreen}{P(data)}}$$
 
-- $P(data|\theta)$: probability of the data given $\theta$: this is the likelihood
+-   $\color{crimson}{P(\theta|data)}$: probability of $\theta$ given the data =\> this is the **posterior distribution** of the parameter $\theta$
 
-- $P(\theta)$: probability of $\theta$ before knowing the data: this is the **prior distribution**
+-   $\color{slateblue}{P(data|\theta)}$: probability of the data given $\theta$ =\> this is the **likelihood**
 
-- $P(data)$: a nomalising constant independant of $\theta$
+-   $\color{orange}{P(\theta)}$: probability of $\theta$ before knowing the data =\> this is the **prior distribution**
 
-
-[$$posterior \propto prior*likelihood$$]{.fragment}
+-   $\color{lightseagreen}{P(data)}$: a nomalising constant independant of $\theta$
 
 ::: notes
 Bayes theorem could be written as follow
@@ -358,24 +356,17 @@ prior cannot depend on the data, it can be more or less informative, depending o
 the denominator can be hard to calculate with more than one parameters (multiple integral)
 :::
 
-
 ## Bayes theorem for model inference
 
-Our understanding of a phenomenon after observation $P(hypothesis|data)$ is 
+$$\color{crimson}{posterior} \propto \color{slateblue}{likelihood} \times \color{orange}{prior}$$
 
-our prior belief $P(hypothesis)$ 
-
-updated by the evidence $P(data|hypothesis)$ 
-
-
-[$updated~belief \propto prior~belief*current~evidence$]{.fragment}
-
+Our [understanding of a phenomenon after observation]{style="color: crimson;"} is our [prior belief]{style="color: orange;"} updated by the [evidence]{style="color: slateblue;"}.
 
 ## Fitting the model - MCMC algorithm
 
-Markov Chain Monte Carlo
+Most of the time, it is impossible to calculate the posterior distribution.
 
-method of simulations to approximate the posterior distributions =\>
+We use Markov Chain Monte Carlo (MCMC) algorithm to approximate the posterior distributions through simulations.
 
 ::: notes
 most of the time, it is difficult / impossible to calculate the posterior distributions, so we need to approximate it through simulation
@@ -383,41 +374,57 @@ most of the time, it is difficult / impossible to calculate the posterior distri
 markow chain =\> to get a stationary distribution that is the posterior distribution of the parameters
 :::
 
-## Fitting the model - MCMC algorithm
+## Fitting the model - MCMC algorithm {.smaller}
 
-1- Initialisation: first values of the parameters (*current*)
+::: incremental
+1.  Initiate the chain: first values of the parameters (*current*)
 
-2- Randomly choose new *candidate* values for the parameters using a random walk function
+2.  Randomly choose new *candidate* values for the parameters using a random walk function
 
-3- Calculate the ratio of posterior probabilities $R = \frac{P(posterior_{candidate})}{P(posterior_{current})}$ from the likelihoods and the prior probabilities
+3.  Calculate the ratio of posterior probabilities $R = \frac{P(posterior_{candidate})}{P(posterior_{current})}$ from the likelihoods and the prior probabilities
 
-4- Accept or reject the candidate value
+4.  Accept ✅ or reject ❌ the candidate value
 
--   if R \> 1 (candidate more likely) =\> accept
+    -   if R \> 1 (candidate more likely) ✅
 
--   if R \< 1 (candidate less likely) =\> accept if X drawn in $\mathcal{U}[0,1]$ \< R (*this avoid getting stuck in a local maximum of likelihood*), reject otherwise
+    -   if R \< 1 (candidate less likely)
 
-5- Repeat steps 2 to 4 thousands of times
+        ✅ if X \< R, with X drawn in $\mathcal{U}[0,1]$
 
-```{=html}
-<!-- voir comment sont choisiées les vakeurs d'initialisation
--->
-```
+        ❌ otherwise
+
+5.  Repeat steps 2 to 4 thousands of times
+:::
+
 
 ::: notes
 ! the initialisation value is NOT the prior, it's the first value of theta.
 But it needs to be compatible with the prior.
+In practise, choosen by the software by default.
 
-random walk =\> EXPLIQUER COMMENT LA TAILLE DES PAS EST DECIDEE
+random walk: the size of the step is choosen to be reasonable
+* too small: the chain moves very slowly
+* too big: we can get stuck
 
-the proba of acception a less likely value is proportional to R
+we accept sometimes when R\<1 to *avoid getting stuck in a local maximum of likelihood*
+
+the proba of acception is proportional to R
 :::
 
 ## Fitting the model - MCMC algorithm
 
 ![](random_walk.png){fig-align="center"}
 
-Source: [Wikipedia](https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm){style="font-size: 22px"}
+[Source: [Wikipedia](https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm)]{style="font-size: 22px"}
+
+
+## Fitting the model - MCMC algorithm
+
+In practice, we assess the convergence of several chains, after a burn-in phase.
+
+![](convergence.png){fig-align="center"} 
+
+[Source: [D. Valle 2023](https://drvalle1.github.io/20_MCMC_convergence.html)]{style="font-size: 22px"}
 
 ::: notes
 we do this many time after a burn-in period
@@ -425,25 +432,58 @@ we do this many time after a burn-in period
 and with several chains
 :::
 
-## Fitting the model - MCMC algorithm
 
-several chains, convergence after burn-in phase
+## Frequentist *vs* Bayesian approaches {.smaller}
 
-![](convergence.png){fig-align="center"} Source: [D. Valle 2023](https://drvalle1.github.io/20_MCMC_convergence.html){style="font-size: 22px"}
+Both approaches use the **likelihood** (the data model)
 
-## Frequentist *vs* Bayesian approaches
+:::::: columns
 
-<!-- to do et mettre plus bas -->
+::: {.column width="45%"}
+**Frequentist approach**
 
-likelihood commune au deux
+::: nonincremental
 
-"La statistique fréquentiste fournit un estimateur ponctuel quand la statistique bayésienne estime une distribution pour chaque paramètre."
+- estimates a single but uncertain value for each parameter  
 
-qudn bcp de données =\> résultats proches
+- uncertainty is described with a **confidence interval**
 
--   Bayesian : credibility interval at X% =\> the true value of the parameter is with the credibility interval with a proba X
+*If the experiment were repeated many times, X% of the intervals would contain the true value*.
+:::
+:::
 
--   Frequentist : confidence interval : if the experiment was repeated many times =\> X% of the intteravl would contain the true value of the parameter
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+
+::: fragment
+**Bayesian approach**
+
+::: nonincremental
+
+- estimates a **distribution** for each parameter  
+
+- uncertainty is described with a **credible interval**
+
+*The probability that the true value lies in the interval is X%*.
+:::
+:::
+:::
+
+:::::
+
+[When the amount of data is large, results are often very similar.]{.fragment}
+
+
+::: notes
+Frequentist optimise the likelihood
+Bayesian combine it with prior
+
+if experiment was repeated many times => generating new data
+
+the bayesian interpretation is more intuitive
+:::
 
 # Some examples
 
