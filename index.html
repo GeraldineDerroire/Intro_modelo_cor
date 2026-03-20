@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-03-19">
+  <meta name="dcterms.date" content="2026-03-20">
   <title>Hierarchical bayesian models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -341,7 +341,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-03-19</p>
+  <p class="date">2026-03-20</p>
 </section>
 <section>
 <section id="correlative-models" class="title-slide slide level1 center">
@@ -512,7 +512,9 @@ Géraldine Derroire
 <li class="fragment">success/failure data (<em>e.g</em>: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a <strong>binomial</strong> distribution</li>
 </ul>
 </div>
+<div class="fragment">
 <p><span style="font-size: 25px">To know more about these distributions: see the Wikipedia pages, and the <a href="https://ben18785.shinyapps.io/distribution-zoo/" data-preview-link="false">distribution zoo</a>.</span></p>
+</div>
 </section>
 <section id="generalised-linear-models" class="slide level2 smaller">
 <h2>Generalised linear models</h2>
@@ -544,12 +546,12 @@ Géraldine Derroire
 <p><span style="font-size: 30px">Linear mixed models have a hierarchical structure.</span></p>
 <div class="fragment">
 <p><span style="font-size: 30px">One or more of their coefficients (the intercept or the response to explanatory variables) varies between groups <em>j</em>:</span></p>
-<p><span class="math display">\[y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)\]</span></p>
+<p><span class="math display">\[y_{ij} \sim \mathcal N(\color{crimson}{\alpha_j} + \beta \times x_{ij} ,  \sigma^2)\]</span></p>
 </div>
 <div class="fragment">
 <p><span style="font-size: 30px">and this variation is modelled by a group-level distribution:</span></p>
-<p><span class="math display">\[\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})\]</span></p>
-<p><span style="font-size: 30px">The group-specific intercepts are not independent parameters: they are drawn from a common distribution.</span></p>
+<p><span class="math display">\[\color{crimson}{\alpha_j} \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})\]</span></p>
+<p><span style="font-size: 30px">The group-specific intercepts <span class="math inline">\(\color{crimson}{\alpha_j}\)</span> are not independent parameters: they are drawn from a common distribution.</span></p>
 <p><span style="font-size: 22px"><em>NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.</em></span></p>
 </div>
 </section>
@@ -563,14 +565,14 @@ Géraldine Derroire
 <h2>Hierarchical model</h2>
 <p>More complex hierarchical models can include covariates in the group-level distribution:</p>
 <p><span class="math display">\[y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)\]</span></p>
-<p><span class="math display">\[\alpha_j \sim \mathcal N(\alpha + \color{OrangeRed}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})\]</span></p>
+<p><span class="math display">\[\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \color{crimson}{\beta_\alpha} \times z_j, \sigma^2_{\alpha})\]</span></p>
 <div class="fragment">
-<p><em>Eg: the response (</em><span class="math inline">\(\boldsymbol{y_{ij}}\)</span>) of individual trees <span class="math inline">\(\boldsymbol{i}\)</span> belonging to species <span class="math inline">\(\boldsymbol{j}\)</span> can be modeled with a species-level parameter (<span class="math inline">\(\boldsymbol{\alpha_j}\)</span>).</p>
+<p><em>Eg: the response (</em><span class="math inline">\(\boldsymbol{y_{ij}}\)</span>) of individual trees <span class="math inline">\(\boldsymbol{i}\)</span> belonging to species <span class="math inline">\(\boldsymbol{j}\)</span> can be modeled with a species-level parameter (<span class="math inline">\(\color{lightseagreen}{\alpha_j}\)</span>).</p>
 <p><em>These species-level parameters can then be modelled using functional traits (</em><span class="math inline">\(\boldsymbol{z_j}\)</span>).</p>
 <div>
 <ul>
-<li><p><span class="math inline">\(\boldsymbol{\alpha}\)</span> is the overall (community-level) intercept</p></li>
-<li><p><span class="math inline">\(\boldsymbol{\beta_\alpha}\)</span> is the effect of the trait on the species intercept</p></li>
+<li><p><span class="math inline">\(\color{slateblue}{\alpha}\)</span> is the overall (community-level) intercept</p></li>
+<li><p><span class="math inline">\(\color{crimson}{\beta_\alpha}\)</span> is the effect of the trait on the species intercept</p></li>
 </ul>
 </div>
 </div>
@@ -588,9 +590,10 @@ Géraldine Derroire
 <li class="fragment"><p>to leverage <strong>prior knowledge</strong> (previous studies or expert knowledge)</p></li>
 <li class="fragment"><p>for its <strong>flexibility</strong> (adapted to heterogeneous or uncomplete data, possible to fit complex models)</p></li>
 </ul>
-<p><span class="fragment"><em>and why not a bayesian approach 🤨?</em> : more computationannly intensive</span></p>
+<p><span class="fragment"><em>and why not a bayesian approach 🤨?</em></span></p>
 <aside class="notes">
 <p>complex models can be hierarchical, non linear, etc…</p>
+<p>why not ? more computationaly intensive</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -784,28 +787,227 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section></section>
-<section id="some-examples" class="title-slide slide level1 center">
-<h1>Some examples</h1>
+<section>
+<section id="some-examples-of-bayesian-model-for-forest-ecology" class="title-slide slide level1 center">
+<h1>Some examples of Bayesian model for forest ecology</h1>
 
 </section>
-
-<section id="conclusion" class="title-slide slide level1 center">
-<h1>Conclusion</h1>
-
-</section>
-
-<section id="references" class="title-slide slide level1 center">
-<h1>References</h1>
-<p>On Bayesian approach</p>
+<section id="our-approach" class="slide level2">
+<h2>Our approach</h2>
+<div class="column">
 <ul>
-<li class="fragment">Gimenez, O. <em>et al</em> 2025. <em>Ten quick tips to get you started with Bayesian statistics</em>. PLOS Computational Biology 21, <a href="https://doi.org/10.1371/journal.pcbi.1012898">e1012898.</a></li>
+<li class="fragment"><p>based on field data (forest inventory)</p></li>
+<li class="fragment"><p>shape of the model choosen to match our ecological hypothesis</p></li>
+<li class="fragment"><p>interpretability of model parameters</p></li>
 </ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="forest.jpg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div></section>
+<section id="growth-model" class="slide level2 smaller">
+<h2>Growth model</h2>
+<p><strong>Objective</strong>: model the radial growth of individual tree, acounting for the effect of ontogeny on growth</p>
+<p><strong>Canham model</strong>: modeling tree growth as a function of its diameter (DBH)</p>
+<p><span class="math display">\[G_{[t-1;t]} \sim \color{green}{Gmax} \times exp \Big( -\frac{1}{2} \times \Big( \frac{log(DBH_{t-1} / \color{red}{Dopt})}{\color{royalblue}{K}} \Big)^2 \Big)\]</span></p>
+<div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="canham.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<p><span style="font-size: 22px"><a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2745.2011.01883.x">Hérault et al 2021</a></span></p>
+</div><div class="column">
+<ul>
+<li class="fragment"><p><span class="math inline">\(\color{green}{Gmax}\)</span> is the maximum growth rate of the tree</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{red}{Dopt}\)</span> is the diameter at which the growth is maximum</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{royalblue}{K}\)</span> is a kurtosis parameter capturing the ontogenetic variation in growth rate</p></li>
+</ul>
+</div></section>
+<section id="growth-model-1" class="slide level2">
+<h2>Growth model</h2>
+<p>Modeling individual growth potential <span class="math inline">\(\color{green}{Gmax}\)</span></p>
+<div class="fragment">
+<div class="column" style="width:55%;">
+<div>
+<ul>
+<li><p>most of the variation in growth is intraspecific (and between genus)</p></li>
+<li><p>traits of roots, wood and leaves were good predictors of species growth, consistently with the fast-slow spectrum</p></li>
+</ul>
+<p><span style="font-size: 22px"><a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ele.14318">Schmitt, Hérault, Derroire 2023</a></span></p>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:35%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="growth.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>based on long-term growth data from Paracou</p>
+<p>the growth potential is modelled for XXXX individuals of XXX species</p>
+<p>decompose the variance between taxonomic levels =&gt;</p>
+<p>get the species growth potential (median of indiv Gmax) =&gt; 0.34 (Eschweilera) to 4.5 (Cecropia) cm DBH/an</p>
+<p>use traits to explain species growth potential with a linear model =&gt; effect of WD (-), fine root diameter (-), leaf calcium content (-), leaf N content (+) =&gt; consistent with fast acquisitive vs slow conservative</p>
+<p>such a model for HidrAmazonia</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="species-distribution-model" class="slide level2">
+<h2>Species distribution model</h2>
+<!-- 
+
+objectif
+
+the model, equation and shape of the relation ship
+
+faire quelque chose assez similaire à ce que j'ai mis pour le modèle de croissance
+en montrant l'interpretabilité des paramètres
+Peut-être ne mettre que la partie en cloche, avec une variable environmentale générique 
+
+ce que tu avait fait autour de diapo 59 pour ta soutenance serait très bien ici 
+
+l'idée est de montrer comment le modèle s'interprête dans le contexte de la niche
+
+-->
+</section>
+<section id="species-distribution-model-1" class="slide level2">
+<h2>Species distribution model</h2>
+<!-- mettre quelques résultats 1 ou 2 slides max
+enb focalisant certainement sur le chap 2 -->
+</section>
+<section id="species-distribution-model-2" class="slide level2">
+<h2>Species distribution model</h2>
+<p>TO DECIDE : put Guillaume model as well ? Not sure as limited time + linear shape…</p>
+</section>
+<section id="post-disturbance-model" class="slide level2 smaller">
+<h2>Post-disturbance model</h2>
+<p><strong>Objective</strong>: model post-disturbance trajectories (secondary and logged forests) for a range of ecosystem attributes (carbon stock, biodiversity…)</p>
+<p><strong>Modeling framework</strong>: combination of <span style="color: turquoise;">long-term</span> and <span style="color: mediumpurple;">short-term</span> processes</p>
+<p><span class="math display">\[Attribute \sim \alpha + (\omega - \alpha) \times (\color{turquoise}{LTP} + \color{mediumpurple}{STP})\]</span></p>
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recovery.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<p><span style="font-size: 22px"><a href="https://www.sciencedirect.com/science/article/pii/S0304380023001497">Maurent et al 2023</a></span></p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<ul>
+<li class="fragment"><p><span class="math inline">\(\color{crimson}{\alpha}\)</span> is the post-disturbane value of the attribute</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{green}{\omega}\)</span> is the pre-disturbane value of the attribute</p></li>
+</ul>
+<p><span class="fragment">We assume an asumptotic recovery towards pre-disturbane values.</span></p>
+</div></section>
+<section id="post-disturbance-model-1" class="slide level2 smaller">
+<h2>Post-disturbance model</h2>
+<p>Long term process</p>
+<p><span class="math display">\[LTP = 1 - exp(-\color{turquoise}{\lambda} \times t)\]</span></p>
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recovery.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<p><span style="font-size: 22px"><a href="https://www.sciencedirect.com/science/article/pii/S0304380023001497">Maurent et al 2023</a></span></p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p>Asymptotic recovery of the attribute at a constant relative speed <span class="math inline">\(\color{turquoise}{\lambda}\)</span>.</p>
+<p>The absolute speed depends on what is left to recover.</p>
+</div></section>
+<section id="post-disturbance-model-2" class="slide level2 smaller">
+<h2>Post-disturbance model</h2>
+<p>Short term process</p>
+<p><span class="math display">\[STP = \Delta \times \Big(\frac{t}{\tau} \times exp({1-\frac{t}{\tau})} \Big) ^ \kappa\]</span></p>
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recovery.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<p><span style="font-size: 22px"><a href="https://www.sciencedirect.com/science/article/pii/S0304380023001497">Maurent et al 2023</a></span></p>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<p>A <span style="color: mediumpurple;">hump</span> or <span style="color: dodgerblue;">drop</span> that occurs at a given moment <span class="math inline">\(\tau\)</span> and has an amplitude <span class="math inline">\(\Delta\)</span>.</p>
+</div></section>
+<section id="post-disturbance-model-3" class="slide level2 smaller">
+<h2>Post-disturbance model</h2>
+<p>Post-logging recovery</p>
+<div class="column" style="width:33%;">
+<p>Carbon stock</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recov_C.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<p>Taxonomic diversity</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recov_taxo.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<p>Functional compo. (WD)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recov_WD.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><p><span style="font-size: 22px"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0378112721006228">Derroire et al 2020</a>, Maurent et all in prep</span></p>
+</section></section>
+<section>
+<section id="conclusion---a-continuum-between-correlative-and-process-based-approaches" class="title-slide slide level1 center">
+<h1>Conclusion - a continuum between correlative and process-based approaches</h1>
+
+</section>
+<section id="assemblage-of-correlative-models" class="slide level2 smaller">
+<h2>Assemblage of correlative models</h2>
+<p>Carbon balance model of French Guiana</p>
+
+<img data-src="C_balance.png" class="quarto-figure quarto-figure-center r-stretch"><p><span style="font-size: 22px"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0378112721006228">Derroire et al 2020</a></span></p>
+</section>
+<section id="fitted-models-in-process-based-approaches" class="slide level2 smaller">
+<h2>Fitted models in process-based approaches</h2>
+<div class="column">
+<div>
+<p>TROLL uses correlative models for</p>
+<ul>
+<li><p>allometries (tree height, crown dimension)</p></li>
+<li><p>leaf lifespan ~ LMA and N</p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Troll.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div><p><span style="font-size: 22px"><a href="https://gmd.copernicus.org/articles/18/5143/2025/">Maréchaux et all 2025</a>, <a href="https://sylvainschmitt.github.io/master-thesis/">Schmitt 2017</a></span></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

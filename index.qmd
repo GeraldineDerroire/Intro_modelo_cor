@@ -161,7 +161,9 @@ Some data are by nature not normally distributed, so we cannot model them with a
 -   success/failure data (*e.g*: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a **binomial** distribution
 :::
 
+::: fragment
 [To know more about these distributions: see the Wikipedia pages, and the [distribution zoo](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}.]{style="font-size: 25px"}
+:::
 
 ## Generalised linear models {.smaller}
 
@@ -201,15 +203,15 @@ When observations are grouped, they are not independent (*e.g.* several observat
 ::: fragment
 [One or more of their coefficients (the intercept or the response to explanatory variables) varies between groups *j*:]{style="font-size: 30px"}
 
-$$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
+$$y_{ij} \sim \mathcal N(\color{crimson}{\alpha_j} + \beta \times x_{ij} ,  \sigma^2)$$
 :::
 
 ::: fragment
 [and this variation is modelled by a group-level distribution:]{style="font-size: 30px"}
 
-$$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
+$$\color{crimson}{\alpha_j} \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
 
-[The group-specific intercepts are not independent parameters: they are drawn from a common distribution.]{style="font-size: 30px"}
+[The group-specific intercepts $\color{crimson}{\alpha_j}$ are not independent parameters: they are drawn from a common distribution.]{style="font-size: 30px"}
 
 [*NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.*]{style="font-size: 22px"}
 :::
@@ -278,17 +280,17 @@ More complex hierarchical models can include covariates in the group-level distr
 
 $$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
 
-$$\alpha_j \sim \mathcal N(\alpha + \color{OrangeRed}{\beta_\alpha \times z_j}, \sigma^2_{\alpha})$$
+$$\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \color{crimson}{\beta_\alpha} \times z_j, \sigma^2_{\alpha})$$
 
 :::: fragment
-*Eg: the response (*$\boldsymbol{y_{ij}}$) of individual trees $\boldsymbol{i}$ belonging to species $\boldsymbol{j}$ can be modeled with a species-level parameter ($\boldsymbol{\alpha_j}$).
+*Eg: the response (*$\boldsymbol{y_{ij}}$) of individual trees $\boldsymbol{i}$ belonging to species $\boldsymbol{j}$ can be modeled with a species-level parameter ($\color{lightseagreen}{\alpha_j}$).
 
 *These species-level parameters can then be modelled using functional traits (*$\boldsymbol{z_j}$).
 
 ::: nonincremental
--   $\boldsymbol{\alpha}$ is the overall (community-level) intercept
+-   $\color{slateblue}{\alpha}$ is the overall (community-level) intercept
 
--   $\boldsymbol{\beta_\alpha}$ is the effect of the trait on the species intercept
+-   $\color{crimson}{\beta_\alpha}$ is the effect of the trait on the species intercept
 :::
 ::::
 
@@ -304,10 +306,12 @@ $$\alpha_j \sim \mathcal N(\alpha + \color{OrangeRed}{\beta_\alpha \times z_j}, 
 
 -   for its **flexibility** (adapted to heterogeneous or uncomplete data, possible to fit complex models)
 
-[*and why not a bayesian approach 🤨?* : more computationannly intensive]{.fragment}
+[*and why not a bayesian approach 🤨?*]{.fragment}
 
 ::: notes
 complex models can be hierarchical, non linear, etc...
+
+why not ? more computationaly intensive
 :::
 
 ## Bayes theorem {.smaller}
@@ -485,12 +489,265 @@ if experiment was repeated many times => generating new data
 the bayesian interpretation is more intuitive
 :::
 
-# Some examples
+# Some examples of Bayesian model for forest ecology
 
-# Conclusion
+## Our approach
 
-# References
+::: column
 
-On Bayesian approach
+* based on field data (forest inventory)
 
--   Gimenez, O. *et al* 2025. *Ten quick tips to get you started with Bayesian statistics*. PLOS Computational Biology 21, [e1012898.](https://doi.org/10.1371/journal.pcbi.1012898)
+* shape of the model choosen to match our ecological hypothesis
+
+* interpretability of model parameters
+
+:::
+
+::: column
+![](forest.jpg){fig-align="center"}
+:::
+
+## Growth model {.smaller}
+
+**Objective**: model the radial growth of individual tree, 
+acounting for the effect of ontogeny on growth
+
+**Canham model**: modeling tree growth as a function of its diameter (DBH)
+
+$$G_{[t-1;t]} \sim \color{green}{Gmax} \times exp \Big( -\frac{1}{2} \times \Big( \frac{log(DBH_{t-1} / \color{red}{Dopt})}{\color{royalblue}{K}} \Big)^2 \Big)$$
+
+::: column
+![](canham.png){fig-align="center"}
+
+[[Hérault et al 2021](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2745.2011.01883.x)]{style="font-size: 22px"}
+
+:::
+
+
+::: column
+
+* $\color{green}{Gmax}$ is the maximum growth rate of the tree
+
+* $\color{red}{Dopt}$ is the diameter at which the growth is maximum
+
+* $\color{royalblue}{K}$ is a kurtosis parameter capturing the ontogenetic variation in growth rate
+
+:::
+
+
+## Growth model 
+
+Modeling individual growth potential $\color{green}{Gmax}$
+
+::: fragment
+
+::: {.column width="55%"}
+
+::: nonincremental
+
+* most of the variation in growth is intraspecific (and between genus)
+
+* traits of roots, wood and leaves were good predictors of species growth, consistently with the fast-slow spectrum
+
+[[Schmitt, Hérault, Derroire 2023](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.14318)]{style="font-size: 22px"}
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+
+::: {.column width="35%"}
+![](growth.png){fig-align="center"}
+:::
+
+:::
+
+::: notes
+based on long-term growth data from Paracou
+
+the growth potential is modelled for XXXX individuals of XXX species
+
+decompose the variance between taxonomic levels =>
+
+get the species growth potential (median of indiv Gmax)
+=> 0.34 (Eschweilera) to 4.5 (Cecropia) cm DBH/an
+
+use traits to explain species growth potential with a linear model
+=> effect of WD (-), fine root diameter (-), leaf calcium content (-), leaf N content (+)
+=> consistent with fast acquisitive vs slow conservative
+
+such a model for HidrAmazonia
+:::
+
+
+## Species distribution model
+
+<!-- 
+
+objectif
+
+the model, equation and shape of the relation ship
+
+faire quelque chose assez similaire à ce que j'ai mis pour le modèle de croissance
+en montrant l'interpretabilité des paramètres
+Peut-être ne mettre que la partie en cloche, avec une variable environmentale générique 
+
+ce que tu avait fait autour de diapo 59 pour ta soutenance serait très bien ici 
+
+l'idée est de montrer comment le modèle s'interprête dans le contexte de la niche
+
+-->
+
+## Species distribution model
+
+<!-- mettre quelques résultats 1 ou 2 slides max
+enb focalisant certainement sur le chap 2 --> 
+
+## Species distribution model
+
+TO DECIDE : put Guillaume model as well ? 
+Not sure as limited time + linear shape...
+
+
+## Post-disturbance model {.smaller}
+
+**Objective**: model post-disturbance trajectories (secondary and logged forests) for a range of ecosystem attributes (carbon stock, biodiversity...)
+
+**Modeling framework**: combination of [long-term]{style="color: turquoise;"} 
+and [short-term]{style="color: mediumpurple;"} processes
+
+$$Attribute \sim \alpha + (\omega - \alpha) \times (\color{turquoise}{LTP} + \color{mediumpurple}{STP})$$
+
+::: {.column width="50%"}
+
+![](recovery.png){fig-align="center"}
+
+[[Maurent et al 2023](https://www.sciencedirect.com/science/article/pii/S0304380023001497)]{style="font-size: 22px"}
+
+:::
+
+::: {.column width="5%"}
+::: 
+
+
+::: {.column width="45%"}
+* $\color{crimson}{\alpha}$ is the post-disturbane value of the attribute 
+
+* $\color{green}{\omega}$ is the pre-disturbane value of the attribute 
+
+[We assume an asumptotic recovery towards pre-disturbane values.]{.fragment}
+:::
+
+
+## Post-disturbance model {.smaller}
+
+Long term process
+
+$$LTP = 1 - exp(-\color{turquoise}{\lambda} \times t)$$
+
+::: {.column width="50%"}
+
+![](recovery.png){fig-align="center"}
+
+[[Maurent et al 2023](https://www.sciencedirect.com/science/article/pii/S0304380023001497)]{style="font-size: 22px"}
+
+:::
+
+::: {.column width="5%"}
+::: 
+
+
+::: {.column width="45%"}
+Asymptotic recovery of the attribute 
+at a constant relative speed $\color{turquoise}{\lambda}$.
+
+The absolute speed depends on what is left to recover.
+:::
+
+## Post-disturbance model {.smaller}
+
+Short term process
+
+$$STP = \Delta \times \Big(\frac{t}{\tau} \times exp({1-\frac{t}{\tau})} \Big) ^ \kappa$$
+
+::: {.column width="50%"}
+
+![](recovery.png){fig-align="center"}
+
+[[Maurent et al 2023](https://www.sciencedirect.com/science/article/pii/S0304380023001497)]{style="font-size: 22px"}
+
+:::
+
+::: {.column width="5%"}
+::: 
+
+
+::: {.column width="45%"}
+A [hump]{style="color: mediumpurple;"} or [drop]{style="color: dodgerblue;"} 
+that occurs at a given moment $\tau$
+and has an amplitude $\Delta$. 
+:::
+
+## Post-disturbance model {.smaller}
+
+Post-logging recovery
+
+::: {.column width="33%"}
+Carbon stock
+
+![](recov_C.png){fig-align="center"}
+:::
+
+
+::: {.column width="33%"}
+
+Taxonomic diversity
+
+![](recov_taxo.png){fig-align="center"}
+
+:::
+
+::: {.column width="33%"}
+Functional compo. (WD)
+
+![](recov_WD.png){fig-align="center"}
+:::
+
+[[Derroire et al 2020](https://www.sciencedirect.com/science/article/abs/pii/S0378112721006228), Maurent et all in prep]{style="font-size: 22px"}
+
+
+# Conclusion - a continuum between correlative and process-based approaches 
+
+## Assemblage of correlative models {.smaller}
+
+Carbon balance model of French Guiana
+
+![](C_balance.png){fig-align="center"}
+
+[[Derroire et al 2020](https://www.sciencedirect.com/science/article/abs/pii/S0378112721006228)]{style="font-size: 22px"}
+
+
+## Fitted models in process-based approaches {.smaller}
+
+::: column
+
+::: nonincremental
+
+TROLL uses correlative models for 
+
+* allometries (tree height, crown dimension)
+
+* leaf lifespan ~ LMA and N
+
+* ...
+
+:::
+
+:::
+
+::: column
+![](Troll.png){fig-align="center"}
+:::
+
+[[Maréchaux et all 2025](https://gmd.copernicus.org/articles/18/5143/2025/), [Schmitt 2017](https://sylvainschmitt.github.io/master-thesis/)]{style="font-size: 22px"}
