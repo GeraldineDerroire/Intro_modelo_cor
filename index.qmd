@@ -501,6 +501,7 @@ the bayesian interpretation is more intuitive
 
 * interpretability of model parameters
 
+
 :::
 
 ::: column
