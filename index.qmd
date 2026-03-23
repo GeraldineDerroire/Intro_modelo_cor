@@ -12,6 +12,15 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     incremental: true
+    logo: logo.png
+include-in-header:
+  - text: |
+      <style>
+      .reveal .slide-logo {
+        max-height: unset;
+        height: 100px;
+      }
+      </style>
 editor: 
   markdown: 
     wrap: sentence
@@ -86,6 +95,8 @@ this is not exclusive to the context of bayesian modelling
 :::
 
 ## Example of the linear model
+
+<!-- Ok for me but very quickly into equations.  -->
 
 $$y_i = \alpha + \beta \times x_i + \epsilon_i$$
 
@@ -298,15 +309,15 @@ $$\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \c
 
 ## Why a Bayesian approach?
 
-<!-- to check and think about, why not bayesian computing costly ???-->
+<!-- to check and think about, why not Bayesian computing costly ???-->
 
--   to quantify **uncertainty** (and propagagte it), as we get a full fistribution for each fitted parameters
+-   to quantify **uncertainty** (and propagate it), as we get a full distribution for each fitted parameters
 
 -   to leverage **prior knowledge** (previous studies or expert knowledge)
 
--   for its **flexibility** (adapted to heterogeneous or uncomplete data, possible to fit complex models)
+-   for its **flexibility** (adapted to heterogeneous or incomplete data, possible to fit complex models)
 
-[*and why not a bayesian approach 🤨?*]{.fragment}
+[*and why not a Bayesian approach 🤨?*]{.fragment}
 
 ::: notes
 complex models can be hierarchical, non linear, etc...
@@ -493,6 +504,8 @@ the bayesian interpretation is more intuitive
 
 ## Our approach
 
+<!-- You have text overflow here -->
+
 ::: column
 
 * based on field data (forest inventory)
@@ -505,10 +518,13 @@ the bayesian interpretation is more intuitive
 :::
 
 ::: column
-![](forest.jpg){fig-align="center"}
+![](forest.JPG){fig-align="center"}
 :::
 
 ## Growth model {.smaller}
+
+<!-- You have text overflow here -->
+
 
 **Objective**: model the radial growth of individual tree, 
 acounting for the effect of ontogeny on growth
@@ -537,6 +553,8 @@ $$G_{[t-1;t]} \sim \color{green}{Gmax} \times exp \Big( -\frac{1}{2} \times \Big
 
 
 ## Growth model 
+
+<!-- You have text overflow here -->
 
 Modeling individual growth potential $\color{green}{Gmax}$
 
@@ -612,6 +630,8 @@ Not sure as limited time + linear shape...
 
 
 ## Post-disturbance model {.smaller}
+
+<!-- You have text overflow here -->
 
 **Objective**: model post-disturbance trajectories (secondary and logged forests) for a range of ecosystem attributes (carbon stock, biodiversity...)
 
@@ -748,7 +768,7 @@ TROLL uses correlative models for
 :::
 
 ::: column
-![](Troll.png){fig-align="center"}
+![](troll.png){fig-align="center"}
 :::
 
 [[Maréchaux et all 2025](https://gmd.copernicus.org/articles/18/5143/2025/), [Schmitt 2017](https://sylvainschmitt.github.io/master-thesis/)]{style="font-size: 22px"}
