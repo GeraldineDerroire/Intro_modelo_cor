@@ -451,10 +451,10 @@ See if I keep-->
 <div class="column" style="width:50%;">
 <div class="fragment">
 <ul>
-<li><p><span style="font-size: 30px">y is the response variable</span></p></li>
-<li><p><span style="font-size: 30px">x is the explanatory variable</span></p></li>
-<li><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span> is the <strong>intercept</strong> (the mean of Y when X = 0)</span></p></li>
-<li><p><span style="font-size: 30px"><span class="math inline">\(\beta\)</span> is the <strong>slope</strong> of the relationship between X and Y</span></p></li>
+<li><p><span style="font-size: 30px"><span class="math inline">\(y\)</span> is the response variable</span></p></li>
+<li><p><span style="font-size: 30px"><span class="math inline">\(x\)</span> is the explanatory variable</span></p></li>
+<li><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span> is the <strong>intercept</strong> (the mean of <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> = 0)</span></p></li>
+<li><p><span style="font-size: 30px"><span class="math inline">\(\beta\)</span> is the <strong>slope</strong> of the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span></span></p></li>
 <li><p><span style="font-size: 30px"><span class="math inline">\(\epsilon_i\)</span> is the <strong>residual</strong>. <span class="math inline">\(\epsilon_i \sim \mathcal N(0, \sigma^2)\)</span></span></p></li>
 </ul>
 </div>
@@ -470,14 +470,14 @@ See if I keep-->
 <section id="example-of-the-linear-model-1" class="slide level2">
 <h2>Example of the linear model</h2>
 <p><span class="math display">\[y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)\]</span></p>
-<p><span style="font-size: 30px">The model predicts a probability density of Y for any value of X normally distributed around the regression line.</span></p>
+<p><span style="font-size: 30px">The model predicts a probability density of <span class="math inline">\(y\)</span> for any value of <span class="math inline">\(x\)</span> normally distributed around the regression line.</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="lm.png" style="width:200.0%"> <span style="font-size: 22px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6">E. Marcon</a></span></p>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p><span style="font-size: 25px">The mean value of Y for any value of X is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
-<li class="fragment"><p><span style="font-size: 25px">The predicted probability density of Y are represented by the red dots: they are normally distributed around the mean with a variance <span class="math inline">\(\sigma^2\)</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">The mean value of <span class="math inline">\(y\)</span> for any value of <span class="math inline">\(x\)</span> is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">The predicted probability density of <span class="math inline">\(y\)</span> are represented by the red dots: they are normally distributed around the mean with a variance <span class="math inline">\(\sigma^2\)</span></span></p></li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -529,7 +529,7 @@ See if I keep-->
 </section>
 <section id="what-if-the-observations-are-not-independent" class="slide level2 smaller">
 <h2>What if the observations are not independent?</h2>
-<p>An linear regression assumes that all observations are <strong>independent</strong>.</p>
+<p>A linear regression assumes that all observations are <strong>independent</strong>.</p>
 <p>When observations are grouped, they are not independent (<em>e.g.</em> several observations on a same site, on a same individual, in a same year…).</p>
 <ul>
 <li class="fragment"><p>We can include the group as a categorical explanatory variable. This evaluate the effect of each group.</p></li>
@@ -788,7 +788,6 @@ See if I keep-->
 </section>
 <section id="our-approach" class="slide level2">
 <h2>Our approach</h2>
-<!-- You have text overflow here -->
 <div class="column" style="width:60%;">
 <ul>
 <li class="fragment"><p>based on field data (forest inventory)</p></li>
@@ -865,6 +864,23 @@ See if I keep-->
 </section>
 <section id="species-distribution-model" class="slide level2">
 <h2>Species distribution model</h2>
+<!-- You have text overflow here -->
+<p><strong>Objective</strong>: modeling the realised ecological niche of tree species</p>
+<p><strong>Modeling framework</strong>: model the probability that a tree belongs to the considered species according to the abiotic environment</p>
+<p><span class="math display">\[Belonging_i \sim Bernoulli[logit^{-1}(\color{turquoise}{\mu}_i)]\]</span></p>
+<p><span class="math display">\[\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times [ln(Light_{i})- \color{red}{\beta}]^2 + \color{royalblue}{\gamma} + {\tau} \times ln(TWI_i) + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="SDM.png" class="quarto-figure quarto-figure-center"> <span style="font-size: 22px">Badouard et all in prep</span></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span class="math inline">\(\color{turquoise}{\mu}\)</span> the probability that a tree <span class="math inline">\(i\)</span> belongs to the considered species (1 if the tree belongs to the species, 0 otherwise)</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{green}{\alpha}\)</span> is the niche width (kurtosis)</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{red}{\beta}\)</span> is the niche optimum</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{royalblue}{\gamma}\)</span> is the abundance of the tree species in the community (the intercept directly related to the mean probability)</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{mediumpurple}{\psi}\)</span> is the effect of spatial autocorrelation of the species represented by a matrix of the <span class="math inline">\(K\)</span> Moran’s eigenvectors (<span class="math inline">\(V\)</span>) most explanatory of the species’ presence</p></li>
+</ul>
+</div></div>
 <!-- 
 
 objectif
@@ -895,7 +911,7 @@ enb focalisant certainement sur le chap 2 -->
 <!-- You have text overflow here -->
 <p><strong>Objective</strong>: model post-disturbance trajectories (secondary and logged forests) for a range of ecosystem attributes (carbon stock, biodiversity…)</p>
 <p><strong>Modeling framework</strong>: combination of <span style="color: turquoise;">long-term</span> and <span style="color: mediumpurple;">short-term</span> processes</p>
-<p><span class="math display">\[Attribute \sim \alpha + (\omega - \alpha) \times (\color{turquoise}{LTP} + \color{mediumpurple}{STP})\]</span></p>
+<p><span class="math display">\[Attribute \sim \color{crimson}{\alpha} + (\color{green}{\omega} - \color{crimson}{\alpha}) \times (\color{turquoise}{LTP} + \color{mediumpurple}{STP})\]</span></p>
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -910,7 +926,7 @@ enb focalisant certainement sur le chap 2 -->
 <li class="fragment"><p><span class="math inline">\(\color{crimson}{\alpha}\)</span> is the post-disturbane value of the attribute</p></li>
 <li class="fragment"><p><span class="math inline">\(\color{green}{\omega}\)</span> is the pre-disturbane value of the attribute</p></li>
 </ul>
-<p><span class="fragment">We assume an asumptotic recovery towards pre-disturbane values.</span></p>
+<p><span class="fragment">We assume an asymptotic recovery towards pre-disturbane values.</span></p>
 </div></section>
 <section id="post-disturbance-model-1" class="slide level2 smaller">
 <h2>Post-disturbance model</h2>
