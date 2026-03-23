@@ -94,9 +94,16 @@ this is not exclusive to the context of bayesian modelling
 ⚠️ Predictions are reliable only if the model remains valid in the considered conditions.
 :::
 
+::: notes
+for prediction : need to think of good validation of the model =\> ex for distribution model do spatial cross-validation
+
+Be careful when applying the model to conditions outside of the range of calibration (eg for climate change)
+:::
+
 ## Example of the linear model
 
-<!-- Ok for me but very quickly into equations.  -->
+<!-- SS: Ok for me but very quickly into equations.  
+See if I keep-->
 
 $$y_i = \alpha + \beta \times x_i + \epsilon_i$$
 
@@ -128,9 +135,6 @@ $$y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)$$
 :::::::
 ::::::::
 
-::: notes
-who want to write the equation of the model we want to fit on the blackboard?
-:::
 
 ## Example of the linear model
 
@@ -154,11 +158,7 @@ $$y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)$$
 read the fig as in 3D
 :::
 
-::: notes
-for prediction : need to think of good validation of the model =\> ex for distribution model do spatial cross-validation
 
-Be careful when applying the model to conditions outside of the range of calibration (eg for climate change)
-:::
 
 ## What if the data are not normally distributed? {.smaller}
 
@@ -309,7 +309,6 @@ $$\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \c
 
 ## Why a Bayesian approach?
 
-<!-- to check and think about, why not Bayesian computing costly ???-->
 
 -   to quantify **uncertainty** (and propagate it), as we get a full distribution for each fitted parameters
 
@@ -504,9 +503,7 @@ the bayesian interpretation is more intuitive
 
 ## Our approach
 
-<!-- You have text overflow here -->
-
-::: column
+::: {.column width="60%"}
 
 * based on field data (forest inventory)
 
@@ -517,7 +514,7 @@ the bayesian interpretation is more intuitive
 
 :::
 
-::: column
+::: {.column width="40%"}
 ![](forest.JPG){fig-align="center"}
 :::
 
