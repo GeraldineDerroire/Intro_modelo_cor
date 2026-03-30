@@ -565,7 +565,7 @@ use traits to explain species growth potential with a linear model =\> effect of
 such a model for HidrAmazonia
 :::
 
-## Species distribution model
+## Species distribution model {.smaller}
 
 <!-- You have text overflow here -->
 
@@ -575,11 +575,13 @@ such a model for HidrAmazonia
 
 $$Belonging_i \sim Bernoulli[logit^{-1}(\color{turquoise}{\mu}_i)]$$
 
-$$\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times [ln(Light_{i})- \color{red}{\beta}]^2 + \color{royalblue}{\gamma} + {\tau} \times ln(TWI_i) + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k$$
+$$\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times (Environment_{i}- \color{red}{\beta})^2 + \color{royalblue}{\gamma} + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k$$
 
 ::::: columns
 ::: {.column width="50%"}
-![](SDM.png){fig-align="center"} [Badouard et all in prep]{style="font-size: 22px"}
+![](Niche.png){fig-align="center" width="60%"}  
+
+[Badouard et all in prep]{style="font-size: 21px"}
 :::
 
 ::: {.column width="50%"}
@@ -619,6 +621,10 @@ l'idée est de montrer comment le modèle s'interprête dans le contexte de la n
 <!-- mettre quelques résultats 1 ou 2 slides max
 enb focalisant certainement sur le chap 2 -->
 ```
+Modeling the realised ecological niche of tree species  
+
+![](Niche_rslt.png){fig-align="center"}  
+[Badouard et all in prep]{style="font-size: 22px"}
 
 ## Species distribution model
 

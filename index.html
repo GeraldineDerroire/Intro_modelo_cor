@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-03-23">
+  <meta name="dcterms.date" content="2026-03-30">
   <title>Hierarchical bayesian models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -347,7 +347,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-03-23</p>
+  <p class="date">2026-03-30</p>
 </section>
 <section>
 <section id="correlative-models" class="title-slide slide level1 center">
@@ -862,16 +862,21 @@ See if I keep-->
           display:block!important;
       }</style></aside>
 </section>
-<section id="species-distribution-model" class="slide level2">
+<section id="species-distribution-model" class="slide level2 smaller">
 <h2>Species distribution model</h2>
 <!-- You have text overflow here -->
 <p><strong>Objective</strong>: modeling the realised ecological niche of tree species</p>
 <p><strong>Modeling framework</strong>: model the probability that a tree belongs to the considered species according to the abiotic environment</p>
 <p><span class="math display">\[Belonging_i \sim Bernoulli[logit^{-1}(\color{turquoise}{\mu}_i)]\]</span></p>
-<p><span class="math display">\[\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times [ln(Light_{i})- \color{red}{\beta}]^2 + \color{royalblue}{\gamma} + {\tau} \times ln(TWI_i) + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k\]</span></p>
+<p><span class="math display">\[\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times (Environment_{i}- \color{red}{\beta})^2 + \color{royalblue}{\gamma} + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k\]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="SDM.png" class="quarto-figure quarto-figure-center"> <span style="font-size: 22px">Badouard et all in prep</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Niche.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+<p><span style="font-size: 21px">Badouard et all in prep</span></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p><span class="math inline">\(\color{turquoise}{\mu}\)</span> the probability that a tree <span class="math inline">\(i\)</span> belongs to the considered species (1 if the tree belongs to the species, 0 otherwise)</p></li>
@@ -901,6 +906,9 @@ l'idée est de montrer comment le modèle s'interprête dans le contexte de la n
 <h2>Species distribution model</h2>
 <!-- mettre quelques résultats 1 ou 2 slides max
 enb focalisant certainement sur le chap 2 -->
+<p>Modeling the realised ecological niche of tree species</p>
+<p><img data-src="Niche_rslt.png" class="quarto-figure quarto-figure-center"><br>
+<span style="font-size: 22px">Badouard et all in prep</span></p>
 </section>
 <section id="species-distribution-model-2" class="slide level2">
 <h2>Species distribution model</h2>
