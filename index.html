@@ -864,26 +864,28 @@ See if I keep-->
 </section>
 <section id="species-distribution-model" class="slide level2 smaller">
 <h2>Species distribution model</h2>
-<!-- You have text overflow here -->
 <p><strong>Objective</strong>: modeling the realised ecological niche of tree species</p>
 <p><strong>Modeling framework</strong>: model the probability that a tree belongs to the considered species according to the abiotic environment</p>
+</section>
+<section id="species-distribution-model-1" class="slide level2 smaller">
+<h2>Species distribution model</h2>
 <p><span class="math display">\[Belonging_i \sim Bernoulli[logit^{-1}(\color{turquoise}{\mu}_i)]\]</span></p>
 <p><span class="math display">\[\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times (Environment_{i}- \color{red}{\beta})^2 + \color{royalblue}{\gamma} + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k\]</span></p>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="Niche.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+<p><img data-src="Niche.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
 </figure>
 </div>
 <p><span style="font-size: 21px">Badouard et all in prep</span></p>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:60%;">
 <ul>
 <li class="fragment"><p><span class="math inline">\(\color{turquoise}{\mu}\)</span> the probability that a tree <span class="math inline">\(i\)</span> belongs to the considered species (1 if the tree belongs to the species, 0 otherwise)</p></li>
 <li class="fragment"><p><span class="math inline">\(\color{green}{\alpha}\)</span> is the niche width (kurtosis)</p></li>
 <li class="fragment"><p><span class="math inline">\(\color{red}{\beta}\)</span> is the niche optimum</p></li>
-<li class="fragment"><p><span class="math inline">\(\color{royalblue}{\gamma}\)</span> is the abundance of the tree species in the community (the intercept directly related to the mean probability)</p></li>
-<li class="fragment"><p><span class="math inline">\(\color{mediumpurple}{\psi}\)</span> is the effect of spatial autocorrelation of the species represented by a matrix of the <span class="math inline">\(K\)</span> Moran’s eigenvectors (<span class="math inline">\(V\)</span>) most explanatory of the species’ presence</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{royalblue}{\gamma}\)</span> is the abundance of the tree species in the community</p></li>
+<li class="fragment"><p><span class="math inline">\(\color{mediumpurple}{\psi}\)</span> is the effect of spatial autocorrelation of the species represented by a matrix of the <span class="math inline">\(K\)</span> Moran’s eigenvectors (<span class="math inline">\(V\)</span>) explanatory of the species’ presence</p></li>
 </ul>
 </div></div>
 <!-- 
@@ -902,7 +904,7 @@ l'idée est de montrer comment le modèle s'interprête dans le contexte de la n
 
 -->
 </section>
-<section id="species-distribution-model-1" class="slide level2">
+<section id="species-distribution-model-2" class="slide level2">
 <h2>Species distribution model</h2>
 <!-- mettre quelques résultats 1 ou 2 slides max
 enb focalisant certainement sur le chap 2 -->
@@ -910,7 +912,7 @@ enb focalisant certainement sur le chap 2 -->
 <p><img data-src="Niche_rslt.png" class="quarto-figure quarto-figure-center"><br>
 <span style="font-size: 22px">Badouard et all in prep</span></p>
 </section>
-<section id="species-distribution-model-2" class="slide level2">
+<section id="species-distribution-model-3" class="slide level2">
 <h2>Species distribution model</h2>
 <p>TO DECIDE : put Guillaume model as well ? Not sure as limited time + linear shape…</p>
 </section>

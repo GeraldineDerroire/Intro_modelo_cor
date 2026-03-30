@@ -567,33 +567,33 @@ such a model for HidrAmazonia
 
 ## Species distribution model {.smaller}
 
-<!-- You have text overflow here -->
-
 **Objective**: modeling the realised ecological niche of tree species
 
 **Modeling framework**: model the probability that a tree belongs to the considered species according to the abiotic environment
+
+## Species distribution model {.smaller}
 
 $$Belonging_i \sim Bernoulli[logit^{-1}(\color{turquoise}{\mu}_i)]$$
 
 $$\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times (Environment_{i}- \color{red}{\beta})^2 + \color{royalblue}{\gamma} + Σ V_{i,k} \times \color{mediumpurple}{\psi}_k$$
 
 ::::: columns
-::: {.column width="50%"}
-![](Niche.png){fig-align="center" width="60%"}  
+::: {.column width="40%"}
+![](Niche.png){fig-align="center" width="80%"}  
 
 [Badouard et all in prep]{style="font-size: 21px"}
 :::
 
-::: {.column width="50%"}
+::: {.column width="60%"}
 -   $\color{turquoise}{\mu}$ the probability that a tree $i$ belongs to the considered species (1 if the tree belongs to the species, 0 otherwise)
 
 -   $\color{green}{\alpha}$ is the niche width (kurtosis)
 
 -   $\color{red}{\beta}$ is the niche optimum
 
--   $\color{royalblue}{\gamma}$ is the abundance of the tree species in the community (the intercept directly related to the mean probability)
+-   $\color{royalblue}{\gamma}$ is the abundance of the tree species in the community
 
--   $\color{mediumpurple}{\psi}$ is the effect of spatial autocorrelation of the species represented by a matrix of the $K$ Moran's eigenvectors ($V$) most explanatory of the species' presence
+-   $\color{mediumpurple}{\psi}$ is the effect of spatial autocorrelation of the species represented by a matrix of the $K$ Moran's eigenvectors ($V$) explanatory of the species' presence
 :::
 :::::
 
