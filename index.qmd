@@ -3,7 +3,7 @@ title: "Hierarchical bayesian models"
 subtitle: "A brief introduction for forest ecology"
 author: Géraldine Derroire
 institute: Cirad - UnB
-date: last-modified
+date: "April 2026"
 format: 
   revealjs:
     theme: night
@@ -12,7 +12,6 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     incremental: true
-    logo: logo.png
 include-in-header:
   - text: |
       <style>
@@ -39,6 +38,11 @@ library(tidyr)
 # Correlative models
 
 ::: notes
+Presentation a bit different from the rest of the workshop, not on process-based modelling
+=> obj is to give a brief overview of a different modelling approach, that we will also use in HidrAmazonia
+
+Very short intro to bayesian modeling but not a workshop
+
 The objective of this first part of the presentation is to give a few concepts that related with things that you may already be familiar with
 
 this is not exclusive to the context of bayesian modelling
@@ -53,7 +57,8 @@ this is not exclusive to the context of bayesian modelling
 
 -   correlative : test correlations between observations and explanatory variables, without assuming the underlying processes
 
-=\> correlative more accurate in the given context =\> process-based more generalisable, as long as the realism of the simulations is evaluated
+=\> correlative more accurate in the given context 
+=\> process-based more generalisable, as long as the realism of the simulations is evaluated
 
 =\> 2 complementary approaches
 :::
@@ -102,10 +107,6 @@ Be careful when applying the model to conditions outside of the range of calibra
 
 ## Example of the linear model
 
-```{=html}
-<!-- SS: Ok for me but very quickly into equations.  
-See if I keep-->
-```
 
 $$y_i = \alpha + \beta \times x_i + \epsilon_i$$
 
@@ -136,6 +137,12 @@ $$y_i \sim \mathcal N(\alpha + \beta \times x_i,  \sigma^2)$$
 ::::
 :::::::
 ::::::::
+
+::: notes
+briefly explain the linear model, that you probably all used already
+to be able to explain vocabulary and concepts that we will use for more complex models
+if too basic, tell me and we move on
+:::
 
 ## Example of the linear model
 
@@ -175,15 +182,19 @@ Some data are by nature not normally distributed, so we cannot model them with a
 [To know more about these distributions: see the Wikipedia pages, and the [distribution zoo](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}.]{style="font-size: 25px"}
 :::
 
-## Generalised linear models {.smaller}
+::: notes
+if count data are models with a normal distribution, we could have negative and non integer prediction
 
-<!-- Is this slide really needed ? -->
+success/failure => 0/1 (we'll see an example later)
+:::
+
+## Generalised linear models {.smaller}
 
 *Generalised linear models* (**GLM**) are an extension of linear models allowing different distributions of the response variable.
 
 :::: nonincremental
 ::: fragment
-[They have 3 component:]{style="font-size: 30px"}
+[They have 3 components:]{style="font-size: 30px"}
 
 -   [a **linear predictor**: a linear combination of explanatory variables]{style="font-size: 30px"}
 
@@ -194,6 +205,10 @@ Some data are by nature not normally distributed, so we cannot model them with a
 [In the linear model seen before, the distribution is *Normal* and the link function the *identity*.]{style="font-size: 25px"}
 :::
 ::::
+
+::: notes
+we'll see an example later
+:::
 
 ## What if the observations are not independent? {.smaller}
 
@@ -284,11 +299,19 @@ ggplot(dat, aes(x, y, color = group)) +
   theme(legend.position = "none")
 ```
 
+::: notes
+one line per group
+
+all parallel as only random intercept
+
+dashed line mean accross groups
+:::
+
 ## Hierarchical model {.smaller}
 
 More complex hierarchical models can include covariates in the group-level distribution:
 
-$$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
+$$y_{ij} \sim \mathcal N(\color{lightseagreen}{\alpha_j} + \beta \times x_{ij} ,  \sigma^2)$$
 
 $$\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \color{crimson}{\beta_\alpha} \times z_j, \sigma^2_{\alpha})$$
 
@@ -306,6 +329,10 @@ $$\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \c
 
 # Bayesian framework
 
+::: notes
+all the first part was not specific to the bayesian approach
+:::
+
 ## Why a Bayesian approach?
 
 -   to quantify **uncertainty** (and propagate it), as we get a full distribution for each fitted parameters
@@ -317,6 +344,8 @@ $$\color{lightseagreen}{\alpha_j} \sim \mathcal N(\color{slateblue}{\alpha} + \c
 [*and why not a Bayesian approach 🤨?*]{.fragment}
 
 ::: notes
+let people answer
+
 complex models can be hierarchical, non linear, etc...
 
 why not ?
@@ -325,8 +354,7 @@ more computationaly intensive
 
 ## Bayes theorem {.smaller}
 
-Theorem published by T.
-Bayes in 1763
+T. Bayes (1763)
 
 $$\color{crimson}{P(A|B)} = \frac{\color{slateblue}{P(B|A)} \times \color{orange}{P(A)}}{\color{lightseagreen}{P(B)}}$$ where
 
@@ -355,12 +383,12 @@ $$\color{crimson}{P(\theta|data)} = \frac{\color{slateblue}{P(data|\theta)} \tim
 
 -   $\color{orange}{P(\theta)}$: probability of $\theta$ before knowing the data =\> this is the **prior distribution**
 
--   $\color{lightseagreen}{P(data)}$: a nomalising constant independant of $\theta$
+-   $\color{lightseagreen}{P(data)}$: a normalising constant independant of $\theta$
 
 ::: notes
 Bayes theorem could be written as follow
 
-P(hyp\|data) is what we want with our correlative approach
+P(theta\|data) is what we want with our correlative approach
 
 likelihood, as in frequentist approach
 
@@ -374,6 +402,12 @@ the denominator can be hard to calculate with more than one parameters (multiple
 $$\color{crimson}{posterior} \propto \color{slateblue}{likelihood} \times \color{orange}{prior}$$
 
 Our [understanding of a phenomenon after observation]{style="color: crimson;"} is our [prior belief]{style="color: orange;"} updated by the [evidence]{style="color: slateblue;"}.
+
+::: notes
+so bayesian very intuitive
+
+similar to the way our brain works, to the way we learn
+:::
 
 ## Fitting the model - MCMC algorithm
 
@@ -414,7 +448,9 @@ markow chain =\> to get a stationary distribution that is the posterior distribu
 But it needs to be compatible with the prior.
 In practise, choosen by the software by default.
 
-random walk: the size of the step is choosen to be reasonable \* too small: the chain moves very slowly \* too big: we can get stuck
+random walk: the size of the step is choosen to be reasonable 
+* too small: the chain moves very slowly 
+* too big: we can get stuck
 
 we accept sometimes when R\<1 to *avoid getting stuck in a local maximum of likelihood*
 
@@ -441,12 +477,38 @@ we do this many time after a burn-in period
 and with several chains
 :::
 
+## Fitting the model in practice
+
+::: {.column width="45%"}
+::: fragment
+**Use already coded tools** (*e.g* brms)
+
+👍 easy and optimised
+
+👎 so easy that you can fit a model without understanding it...
+:::
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+::: fragment
+**Write the model and its likelihood explicitly** (*e.g* with Stan)
+
+👍 you understand and control what you do
+
+👎 slightly more trickly
+:::
+::: 
+
 ## Frequentist *vs* Bayesian approaches {.smaller}
 
-Both approaches use the **likelihood** (the data model)
+Both approaches use the **likelihood** (the data model).
 
 ::::::::: columns
 :::: {.column width="45%"}
+::: fragment
 **Frequentist approach**
 
 ::: nonincremental
@@ -455,6 +517,7 @@ Both approaches use the **likelihood** (the data model)
 -   uncertainty is described with a **confidence interval**
 
 *If the experiment were repeated many times, X% of the intervals would contain the true value*.
+:::
 :::
 ::::
 
@@ -468,7 +531,7 @@ Both approaches use the **likelihood** (the data model)
 ::: nonincremental
 -   estimates a **distribution** for each parameter
 
--   uncertainty is described with a **credible interval**
+-   uncertainty is described with a **credibility interval**
 
 *The probability that the true value lies in the interval is X%*.
 :::
@@ -479,7 +542,9 @@ Both approaches use the **likelihood** (the data model)
 [When the amount of data is large, results are often very similar.]{.fragment}
 
 ::: notes
-Frequentist optimise the likelihood Bayesian combine it with prior
+Frequentist optimise the likelihood 
+
+Bayesian combine it with prior
 
 if experiment was repeated many times =\> generating new data
 
@@ -504,9 +569,7 @@ the bayesian interpretation is more intuitive
 
 ## Growth model {.smaller}
 
-<!-- You have text overflow here -->
-
-**Objective**: model the radial growth of individual tree, acounting for the effect of ontogeny on growth
+**Objective**: model the radial growth of individual trees, acounting for the effect of ontogeny on growth
 
 **Canham model**: modeling tree growth as a function of its diameter (DBH)
 
@@ -527,8 +590,6 @@ $$G_{[t-1;t]} \sim \color{green}{Gmax} \times exp \Big( -\frac{1}{2} \times \Big
 :::
 
 ## Growth model
-
-<!-- You have text overflow here -->
 
 Modeling individual growth potential $\color{green}{Gmax}$
 
@@ -552,15 +613,18 @@ Modeling individual growth potential $\color{green}{Gmax}$
 :::::::
 
 ::: notes
-based on long-term growth data from Paracou
+an example based on long-term growth data from Paracou
 
 the growth potential is modelled for XXXX individuals of XXX species
 
-decompose the variance between taxonomic levels =\>
+decompose the variance between taxonomic levels 
 
-get the species growth potential (median of indiv Gmax) =\> 0.34 (Eschweilera) to 4.5 (Cecropia) cm DBH/an
+get the species growth potential (median of indiv Gmax) 
+0.34 (Eschweilera) to 4.5 (Cecropia) cm DBH/an
 
-use traits to explain species growth potential with a linear model =\> effect of WD (-), fine root diameter (-), leaf calcium content (-), leaf N content (+) =\> consistent with fast acquisitive vs slow conservative
+use traits to explain species growth potential with a linear model 
+=> effect of WD (-), fine root diameter (-), leaf calcium content (-), leaf N content (+) 
+=> consistent with fast acquisitive vs slow conservative
 
 such a model for HidrAmazonia
 :::
@@ -597,43 +661,17 @@ $$\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times (Environment_{i}- 
 :::
 :::::
 
-```{=html}
-<!-- 
-
-objectif
-
-the model, equation and shape of the relation ship
-
-faire quelque chose assez similaire à ce que j'ai mis pour le modèle de croissance
-en montrant l'interpretabilité des paramètres
-Peut-être ne mettre que la partie en cloche, avec une variable environmentale générique 
-
-ce que tu avait fait autour de diapo 59 pour ta soutenance serait très bien ici 
-
-l'idée est de montrer comment le modèle s'interprête dans le contexte de la niche
-
--->
-```
 
 ## Species distribution model
 
-```{=html}
-<!-- mettre quelques résultats 1 ou 2 slides max
-enb focalisant certainement sur le chap 2 -->
-```
+
 Modeling the realised ecological niche of tree species  
 
 ![](Niche_rslt.png){fig-align="center"}  
 [Badouard et all in prep]{style="font-size: 22px"}
 
-## Species distribution model
-
-TO DECIDE : put Guillaume model as well ?
-Not sure as limited time + linear shape...
 
 ## Post-disturbance model {.smaller}
-
-<!-- You have text overflow here -->
 
 **Objective**: model post-disturbance trajectories (secondary and logged forests) for a range of ecosystem attributes (carbon stock, biodiversity...)
 
@@ -651,9 +689,9 @@ $$Attribute \sim \color{crimson}{\alpha} + (\color{green}{\omega} - \color{crims
 :::
 
 ::: {.column width="45%"}
--   $\color{crimson}{\alpha}$ is the post-disturbane value of the attribute
+-   $\color{crimson}{\alpha}$ is the post-disturbance value of the attribute
 
--   $\color{green}{\omega}$ is the pre-disturbane value of the attribute
+-   $\color{green}{\omega}$ is the pre-disturbance value of the attribute
 
 [We assume an asymptotic recovery towards pre-disturbane values.]{.fragment}
 :::
@@ -724,6 +762,12 @@ Functional compo.
 [[Derroire et al 2020](https://www.sciencedirect.com/science/article/abs/pii/S0378112721006228), Maurent et all in prep]{style="font-size: 22px"}
 
 # Conclusion - a continuum between correlative and process-based approaches
+
+::: notes
+2 quite different modelling approaches
+
+but actually can be somewhere along a continuum
+:::
 
 ## Assemblage of correlative models {.smaller}
 
