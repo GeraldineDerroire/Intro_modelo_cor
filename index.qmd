@@ -198,9 +198,9 @@ success/failure => 0/1 (we'll see an example later)
 
 -   [a **linear predictor**: a linear combination of explanatory variables]{style="font-size: 30px"}
 
--   [a **distribution** of individual responses around their mean]{style="font-size: 30px"}
+-   [a **distribution** of individual responses]{style="font-size: 30px"}
 
--   [a **link function** between the predictor (defined on $\mathbb{R}$) and the mean response (not necessarily defined on $\mathbb{R}$)]{style="font-size: 30px"}
+-   [a **link function** between the predictor (defined on $\mathbb{R}$) and the response (not necessarily defined on $\mathbb{R}$)]{style="font-size: 30px"}
 
 [In the linear model seen before, the distribution is *Normal* and the link function the *identity*.]{style="font-size: 25px"}
 :::
@@ -385,6 +385,11 @@ $$\color{crimson}{P(\theta|data)} = \frac{\color{slateblue}{P(data|\theta)} \tim
 
 -   $\color{lightseagreen}{P(data)}$: a normalising constant independant of $\theta$
 
+::: fragment
+
+$$\color{crimson}{P(\theta|data)} \propto  \color{slateblue}{P(data|\theta)} \times \color{orange}{P(\theta)}$$
+:::
+
 ::: notes
 Bayes theorem could be written as follow
 
@@ -502,51 +507,67 @@ and with several chains
 :::
 ::: 
 
+## Frequentist *vs* Bayesian approaches 
+
+- Both approaches use the **likelihood** (the data model).
+
+- When the amount of data is large, results are often very similar.
+
+
 ## Frequentist *vs* Bayesian approaches {.smaller}
 
-Both approaches use the **likelihood** (the data model).
-
 ::::::::: columns
-:::: {.column width="45%"}
+:::: {.column width="47%"}
 ::: fragment
 **Frequentist approach**
 
 ::: nonincremental
--   estimates a single but uncertain value for each parameter
+-  a unique true value of the parameter
 
--   uncertainty is described with a **confidence interval**
+-  the model gives a single estimate of the parameter
 
-*If the experiment were repeated many times, X% of the intervals would contain the true value*.
+-  the uncertainty comes from sampling variability
+
+-  the uncertainty is described with a **confidence interval**
+
+*If the experiment was repeated many times, X% of the intervals would contain the true value*.
 :::
 :::
 ::::
 
-::: {.column width="10%"}
+::: {.column width="6%"}
 :::
 
-::::: {.column width="45%"}
+::::: {.column width="47%"}
 :::: fragment
 **Bayesian approach**
 
 ::: nonincremental
--   estimates a **distribution** for each parameter
+- the parameter is considered as uncertain (unknown random variable)
 
--   uncertainty is described with a **credibility interval**
+- the model estimates a probability **distribution** for the parameter
 
-*The probability that the true value lies in the interval is X%*.
+- uncertainty is summarised with a **credibility interval**
+
+*Given the data and the model, the probability that the parameter lies in the interval is X%*.
 :::
 ::::
 :::::
 :::::::::
-
-[When the amount of data is large, results are often very similar.]{.fragment}
 
 ::: notes
 Frequentist optimise the likelihood 
 
 Bayesian combine it with prior
 
-if experiment was repeated many times =\> generating new data
+Frequentist:
+→ randomness is in the data
+→ parameter is fixed
+→ intervals come from imagined repetitions
+Bayesian:
+→ randomness is in the parameter (our knowledge about it)
+→ data are observed
+→ intervals come from a probability distribution over θ
 
 the bayesian interpretation is more intuitive
 :::
