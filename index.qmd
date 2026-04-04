@@ -670,7 +670,7 @@ $$\color{turquoise}{\mu}_i \sim  \color{green}{\alpha} \times (Environment_{i}- 
 :::
 
 ::: {.column width="60%"}
--   $\color{turquoise}{\mu}$ the probability that a tree $i$ belongs to the considered species (1 if the tree belongs to the species, 0 otherwise)
+-   $\color{turquoise}{\mu}$ the probability that a tree $i$ belongs to the considered species  
 
 -   $\color{green}{\alpha}$ is the niche width (kurtosis)
 
